@@ -1,0 +1,19 @@
+{
+  "name": "logcon",
+  "version": "1.0.0",
+  "description": "12월 15-16일",
+  "main": "bin/www",
+  "scripts": {
+    "test": "node bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teamlog/LOGCON.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teamlog/LOGCON/issues"
+  },
+  "homepage": "https://github.com/teamlog/LOGCON#readme"
+}
