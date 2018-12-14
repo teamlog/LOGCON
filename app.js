@@ -16,7 +16,7 @@ app.use('/', indexRouter);
 app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
 app.use('/notice', noticeRouter);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 
