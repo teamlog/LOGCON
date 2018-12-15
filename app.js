@@ -11,11 +11,15 @@ const indexRouter = require('./routes/index');
 const rankRouter = require('./routes/rank');
 const myPageRouter = require('./routes/mypage');
 const noticeRouter = require('./routes/notice');
+const loginRouter = require('./routes/login');
+const problemRouter = require('./routes/problem');
 
 app.use('/', indexRouter);
 app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
 app.use('/notice', noticeRouter);
+app.use('/login',loginRouter);
+app.use('/problem',problemRouter);
 app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
