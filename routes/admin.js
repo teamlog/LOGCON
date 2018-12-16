@@ -37,3 +37,5 @@ router.post('/admin/notice',(req,res) => {
     const content = req.body.content;
     db.query('insert TITLE,CONTENT values(?,?)',[title,content]);  
 })
+
+module.exports = router;
