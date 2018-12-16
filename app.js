@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const ejs = require('ejs');
-const db = require('./db/con');
 const app = express();
 const session = require('express-session');
 const indexRouter = require('./routes/index');
@@ -13,6 +12,7 @@ const myPageRouter = require('./routes/mypage');
 const noticeRouter = require('./routes/notice');
 const loginRouter = require('./routes/login');
 const problemRouter = require('./routes/problem');
+const helmet = require('helmet');
 
 app.use('/', indexRouter);
 app.use('/rank',rankRouter);
@@ -37,7 +37,7 @@ app.use(session({
 app.use(passport.initialize()); // passport 구동
 app.use(passport.session()); // 세션 연결
 app.use(express.static(path.join(__dirname, 'html')));
-
+app.use(helmet());
 passportConfig(); 
 
 // catch 404 and forward to error handler
