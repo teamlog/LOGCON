@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< HEAD
 const db = require('../db/con');
 const router = express.Router();
 
@@ -10,10 +11,22 @@ router.get('/mypage',(req,res) => {
             school : result[0].SCHOOL,
             score : result[0].SCORE,
             coment : result[0].PROFILE_COMENT
+=======
+const router = express.Router();
+
+router.get('/mypage',(req,res) => {
+    con.query('select score,school,id from users where id = ?', req.session.id, (err,result) => {
+        if (err) throw err;
+        res.render('mypage.ejs',{
+            id : result[0].id,
+            school : result[0].school,
+            score : result[0].score
+>>>>>>> bangseonghun
         })
     })
 })
 
+<<<<<<< HEAD
 router.post('/mypage',(req,res) => {
     const ment = req.body.ment;
     const user = req.session.id;
@@ -22,3 +35,6 @@ router.post('/mypage',(req,res) => {
 })
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> bangseonghun
