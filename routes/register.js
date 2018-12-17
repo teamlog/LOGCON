@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< HEAD
 const randomstring = require('randomstring');
 const nodemailer = require('nodemailer');
 const db = require('../db/con');
@@ -61,3 +62,13 @@ router.get('/register',(req,res) => {
 })
 
 module.exports = router;
+=======
+const router = express.Router();
+
+router.get('register', (req,res) => {
+    res.render('register.html');
+})
+.post('register', (req,res) => {
+    
+})
+>>>>>>> bangseonghun
