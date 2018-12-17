@@ -79,7 +79,6 @@ function commandInspection(text) {
     
     // login
     } else if (text.match(login) != null) {
-        let userLogin = text.split(" ");
         
     }
 }
