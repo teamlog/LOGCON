@@ -18,14 +18,12 @@ const adminRouter = require('./routes/admin');
 const registerRouter = require('./routes/register');
 const helmet = require('helmet');
 
-//app.use(app.router);
-//routes.initialize(app);
 app.use('/', indexRouter);
 app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
 app.use('/notice', noticeRouter);
 app.use('/login',loginRouter);
-app.use('/problem',problemRouter);
+app.use('/challenge',problemRouter);
 app.use('/auth',authRouter);
 app.use('/admin',adminRouter);
 app.use('/register',registerRouter);
