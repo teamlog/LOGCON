@@ -1,0 +1,34 @@
+{
+  "name": "logcon",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "http": "0.0.0",
+    "http-errors": "^1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "description": "LOGCON ======",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teamlog/LOGCON.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teamlog/LOGCON/issues"
+  },
+  "homepage": "https://github.com/teamlog/LOGCON#readme"
+}
