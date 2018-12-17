@@ -4,42 +4,33 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const ejs = require('ejs');
-<<<<<<< HEAD
-=======
 const db = require('./db/con');
->>>>>>> bangseonghun
 const app = express();
 const session = require('express-session');
 const indexRouter = require('./routes/index');
 const rankRouter = require('./routes/rank');
 const myPageRouter = require('./routes/mypage');
 const noticeRouter = require('./routes/notice');
-<<<<<<< HEAD
 const loginRouter = require('./routes/login');
 const problemRouter = require('./routes/problem');
+const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
+const registerRouter = require('./routes/register');
 const helmet = require('helmet');
-=======
->>>>>>> bangseonghun
 
 app.use('/', indexRouter);
 app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
 app.use('/notice', noticeRouter);
-<<<<<<< HEAD
 app.use('/login',loginRouter);
 app.use('/problem',problemRouter);
-app.set('views', path.join(__dirname, 'public'));
+app.use('/auth',authRouter);
+app.use('/admin',adminRouter);
+app.use('/register',registerRouter);
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'html')));
 
-=======
-app.set('views', path.join(__dirname, 'public'));
-app.set('view engine', 'html');
-app.set('view engine', 'ejs');
-
-//app.use(logger('dev'));
->>>>>>> bangseonghun
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -49,15 +40,8 @@ app.use(session({
   resave: false,  //재접속 시 세션아이디 재발급x
   saveUninitialized: true,  //세션 사용 전까지 세션아이디 발급x
 }));
-app.use(passport.initialize()); // passport 구동
-app.use(passport.session()); // 세션 연결
 app.use(express.static(path.join(__dirname, 'html')));
-<<<<<<< HEAD
-app.use(helmet());
-=======
-
->>>>>>> bangseonghun
-passportConfig(); 
+app.use(helmet()); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -75,35 +59,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-<<<<<<< HEAD
-=======
-
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-   /* User.findOne({ username: username }, (err, user) => {
-      if (err)
-         return done(err);
-      if (!user)
-        return done(null, false, { message: 'Incorrect username.' });
-      if (!user.validPassword(password)) 
-        return done(null, false, { message: 'Incorrect password.' });
-      return done(null, user);
-    });
-  */
-  }
-));
-
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/', 
-  failureRedirect: '/login' 
-}));
-
-module.exports = app;
-
->>>>>>> bangseonghun
 app.listen(3000, () => {
   console.log("connect");
 });
