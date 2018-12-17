@@ -19,7 +19,7 @@
         <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
 
         <p>This page is home page. You can see the rules of this game and some of the roaming paths.</p>
-        <p class="output">Your score : 점수</p>
+        <p class="output">Your score : <%= score %></p>
 
         <br>
         <p>You can see how to use this page by enter <a href="help.html">help</a>.</p>
@@ -41,7 +41,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information">seonghun@sunrin:/home$ </span>
+                <span id="user-information"><%= id %>@<%= school %>:/home$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>

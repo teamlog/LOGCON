@@ -25,8 +25,8 @@ function escapeHtml(unsafe) {
          .replace(/&/g, "&amp;")
          .replace(/</g, "&lt;")
          .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+         .replace(/"/g, "")
+         .replace(/'/g, "");
 }
 
 let cd = /^cd/;
@@ -35,6 +35,7 @@ let echo = /^echo\s/;
 let login = /^login\s/;
 let register = /^register\s/;
 let auth = /^auth\s/;
+let solve = /^solve\s/; // answer
 function commandInspection(text) {
     // cd
     if (text.match(cd) != null) {
@@ -81,8 +82,8 @@ function commandInspection(text) {
     
     // login
     } else if (text.match(login) != null) {
-        let userLogin = text.split(" ");
-        if (userLogin[2] == "-p") {
+        let dividedLogin = text.split(" ");
+        if (dividedLogin[2] == "-p" && dividedLogin.length == 4) {
 
             path = fetch("$$$$$ 주소 $$$$$", {
                 method: "post",
@@ -90,9 +91,8 @@ function commandInspection(text) {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: JSON.stringify({
-                    // "word": word,
-                    // "token": getCookie("token")
-
+                    "id": dividedLogin[1],
+                    "pwd": dividedLogin[3]
                 })
             })
             .then(function (response) {
@@ -102,14 +102,17 @@ function commandInspection(text) {
 
             })
 
+        } else {
+            history.innerHTML += ("<br>" + "The login statement is strange.");
         }
     
     
     
     // register
+    // register asdf -p 1234 --email slimejam01@gmail.com --school 선린인터넷고등학교
     } else if (text.match(register) != null) {
-        let userRegister = text.split(" ");
-        if (userRegister[2] == "-p" && userRegister[4] == "--email" && userRegister[6] == "--school") {
+        let dividedRegister = text.split(" ");
+        if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && dividedRegister.length == 8) {
 
             path = fetch("$$$$$ 주소 $$$$$", {
                 method: "post",
@@ -117,8 +120,10 @@ function commandInspection(text) {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: JSON.stringify({
-                    // "word": word,
-                    // "token": getCookie("token")
+                    "id": dividedRegister[1],
+                    "pwd": dividedRegister[3],
+                    "email": dividedRegister[5],
+                    "school": dividedRegister[7]
 
                 })
             })
@@ -129,12 +134,82 @@ function commandInspection(text) {
 
             })
 
+        } else {
+            history.innerHTML += ("<br>" + "The register statement is strange.");
         }
 
     // auth
     } else if (text.match(auth) != null) {
-        
-    }
+        let dividedAuthKey = text.split(" ");
+        if (dividedAuthKey.length == 2) {
 
+            path = fetch("$$$$$ 주소 $$$$$", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: JSON.stringify({
+                    "key": dividedAuthKey[1],
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+
+            })
+        } else {
+            history.innerHTML += ("<br>" + "The auth statement is strange.");
+        }
+
+    // solve (answer)
+    // solve --id=1 --answer=이것은답이다
+    // sovle -i=1 -a=이것은답이다
+    } else if (text.match(solve) != null) {
+        let dividedSolve = text.split(" ");
+        let id, answer;
+        if ((dividedSolve[1].match(/^--id\=|-i\=/) != null) && (dividedSolve[2].match(/^--answer\=|^-a\=/)) && (dividedSolve.length == 3)) {
+
+            // id 검사
+            if (dividedSolve[1].match(/^--id\=/) != null) {
+                id = dividedSolve[1].substring(5);
+            } else if (dividedSolve[1].match(/^-i\=/) != null) {
+                id = dividedSolve[1].substring(3);
+            } else {
+                history.innerHTML += ("<br>" + "id syntax is strange.");
+            }
+
+            // answer 검사
+            if (dividedSolve[2].match(/^--answer\=/) != null) {
+                answer = dividedSolve[2].substring(9);
+            } else if (dividedSolve[2].match(/^-a\=/) != null) {
+                answer = dividedSolve[2].substring(3);
+            } else {
+                history.innerHTML += ("<br>" + "answer syntax is strange.");
+            }
+
+            // 답 전달
+            path = fetch("$$$$$ 주소 $$$$$", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: JSON.stringify({
+                    "id": id,
+                    "answer": answer
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+
+            })
+
+        } else {
+            history.innerHTML += ("<br>" + "The solve statement is strange.");
+        }
+    }
+    
     
 }
