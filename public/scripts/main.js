@@ -79,6 +79,27 @@ function commandInspection(text) {
     
     // login
     } else if (text.match(login) != null) {
-        
+        let userLogin = text.split(" ");
+        if (userLogin[2] == "-p") {
+
+            path = fetch("$$$$$ 주소 $$$$$", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: JSON.stringify({
+                    // "word": word,
+                    // "token": getCookie("token")
+                    
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+
+            })
+
+        }
     }
 }
