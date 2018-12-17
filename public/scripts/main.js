@@ -33,6 +33,8 @@ let cd = /^cd/;
 let ls = /^ls$/;
 let echo = /^echo\s/;
 let login = /^login\s/;
+let register = /^register\s/;
+let auth = /^auth\s/;
 function commandInspection(text) {
     // cd
     if (text.match(cd) != null) {
@@ -47,7 +49,7 @@ function commandInspection(text) {
                 location.href = "challenge.html";
                 break;
             case "cd board":
-                location.href = "board.html";
+                location.href = "notice.html";
                 break;
             case "cd rank":
                 location.href = "rank.html";
@@ -67,7 +69,7 @@ function commandInspection(text) {
     } else if (text.match(ls) != null) {
         history.innerHTML += ("<br>" + "home" + 
                                 "<br>" + "challenge" + 
-                                "<br>" + "board" + 
+                                "<br>" + "notice" + 
                                 "<br>" + "rank" + 
                                 "<br>" + "login" +
                                 "<br>" + "register");
@@ -90,7 +92,7 @@ function commandInspection(text) {
                 body: JSON.stringify({
                     // "word": word,
                     // "token": getCookie("token")
-                    
+
                 })
             })
             .then(function (response) {
@@ -101,5 +103,38 @@ function commandInspection(text) {
             })
 
         }
+    
+    
+    
+    // register
+    } else if (text.match(register) != null) {
+        let userRegister = text.split(" ");
+        if (userRegister[2] == "-p" && userRegister[4] == "--email" && userRegister[6] == "--school") {
+
+            path = fetch("$$$$$ 주소 $$$$$", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: JSON.stringify({
+                    // "word": word,
+                    // "token": getCookie("token")
+
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+
+            })
+
+        }
+
+    // auth
+    } else if (text.match(auth) != null) {
+        
     }
+
+    
 }
