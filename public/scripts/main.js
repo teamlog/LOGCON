@@ -46,8 +46,11 @@ function commandInspection(text) {
             case "cd home":
                 location.href = "index.html";
                 break;
+            case "cd challenges":
+                location.href = "challenges.html";
+                break;
             case "cd challenge":
-                location.href = "challenge.html";
+                location.href = "challenges.html";
                 break;
             case "cd board":
                 location.href = "notice.html";
@@ -69,7 +72,7 @@ function commandInspection(text) {
     // ls
     } else if (text.match(ls) != null) {
         history.innerHTML += ("<br>" + "home" + 
-                                "<br>" + "challenge" + 
+                                "<br>" + "challenges" + 
                                 "<br>" + "notice" + 
                                 "<br>" + "rank" + 
                                 "<br>" + "login" +

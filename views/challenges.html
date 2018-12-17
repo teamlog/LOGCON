@@ -17,21 +17,11 @@
     <div class="overlay"></div>
     <div class="terminal">
         <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
-
-        <p>This page is home page. You can see the rules of this game and some of the roaming paths.</p>
-        <p class="output">Your score : <%= score %></p>
-
-        <br>
-        <p>You can see how to use this page by enter <a href="help.html">help</a>.</p>
+        <p>This page is challenges page. You can enter the correct answer using the commands listed below by going into the problem page.</p>
+        <p class="output"></p>
 
         <br>
         <p>Enter <a href="index.html">home</a> to return the main screen.</p>
-        <p>Enter <a href="challenges.html">challenges</a> to see a list of issues.</p>
-        <p>Enter <a href="notice.html">notice</a> to confirm the announcement.</p>
-        <p>Enter <a href="rank.html">rank</a> to see the rankings.</p>
-
-        <br>
-        <p>Enter <a href="login.html">login</a> to perform the login.</p>
         <p>Enter <a href="register.html">register</a> to perform the register.</p>
 
         <br>
@@ -41,7 +31,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= id %>@<%= school %>:/home$ </span>
+                <span id="user-information"><%= id %>@<%= school %>:/login$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
@@ -50,12 +40,3 @@
     
 </body>
 </html>
-
-
-<!-- 반드시 들어가야 할 것 : 
-    > Enter 'home' to return to the main screen.
-    > Enter 'achievement' to resolve the issue. 
-    > Enter 'board' to confirm the announcement.
-    > Enter 'rank' to see the rankings.
-
--->
