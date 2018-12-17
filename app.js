@@ -18,6 +18,8 @@ const adminRouter = require('./routes/admin');
 const registerRouter = require('./routes/register');
 const helmet = require('helmet');
 
+//app.use(app.router);
+//routes.initialize(app);
 app.use('/', indexRouter);
 app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
@@ -59,6 +61,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log("connect");
 });
+
+module.exports = app;
