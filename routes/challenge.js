@@ -7,9 +7,20 @@ router.get('/challenge/:num',(req,res) => {
     pnum = req.params.num;
     db.query('select CONTENT,TITLE from Problems where id = ?',num,(err,result) => {
         if(err) throw err;
-        res.render('challenge.ejs',{
-            info : result
-        })
+        if(req.session.id){
+            res.render('challenge.ejs',{
+                info : result,
+                user_id : req.session.id,
+                user_school: req.session.school
+            })
+        }
+        else{
+            res.render('challenge.ejs',{
+                info : result,
+                user_id : 'guest',
+                user_school: 'undefined'            
+            })
+        }
     })
 })
 router.post('/challenge/:num',(req,res) => {
@@ -44,9 +55,20 @@ router.post('/challenge/:num',(req,res) => {
 router.get('/challenge',(req,res) => {
     db.query('select TITLE from Problems',(err,result) => {
         if(err) throw err;
-        res.render('challenges.ejs',{
-            title : result
-        });
+        if(req.session.id){
+            res.render('challenges.ejs',{
+                title : result,
+                user_id : req.session.id,
+                user_school: req.session.school
+            })
+        }
+        else{
+            res.render('challenges.ejs',{
+                title : results,
+                user_id : 'guest',
+                user_school : 'undefiend'
+            })
+        }
     })
 })
 
