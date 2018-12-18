@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../db/con');
+const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/login',(req,res) => {
