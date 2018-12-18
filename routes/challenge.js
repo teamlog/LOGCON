@@ -64,7 +64,7 @@ router.get('/challenge',(req,res) => {
         }
         else{
             res.render('challenges.ejs',{
-                title : results,
+                title : result,
                 user_id : 'guest',
                 user_school : 'undefiend'
             })
