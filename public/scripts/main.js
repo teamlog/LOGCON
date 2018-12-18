@@ -36,6 +36,7 @@ let login = /^login\s/;
 let register = /^register\s/;
 let auth = /^auth\s/;
 let solve = /^solve\s/; // answer
+let comment = /^comment\s/;
 function commandInspection(text) {
     // cd
     if (text.match(cd) != null) {
@@ -63,6 +64,9 @@ function commandInspection(text) {
                 break;
             case "cd rank":
                 location.href = "rank.html";
+                break;
+            case "cd mypage":
+                location.href = "mypage.html";
                 break;
             case "cd login":
                 location.href = "login.html";
@@ -206,6 +210,27 @@ function commandInspection(text) {
                 body: JSON.stringify({
                     "id": id,
                     "answer": answer
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+
+            })
+
+        // comment
+        } else if (text.match(comment) != null) {
+            let commentText = text.substring(8);
+
+            // 코멘트 전달
+            path = fetch("$$$$$ 주소 $$$$$", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: JSON.stringify({
+                    "ment": commentText
                 })
             })
             .then(function (response) {

@@ -11,28 +11,24 @@
     <link rel="stylesheet" href="../public/stylesheets/main.css">
     <script src="../public/scripts/main.js"></script>
 
-    <script>
-        let params = new URLSearchParams(location.search);
-        let id = parseInt(params.get("id")); // is the number
-    </script>
     
 </head>
 <body>
     <div class="overlay"></div>
     <div class="terminal">
         <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
-        <p>This page is rank page. You can check the ranking.</p>
+        <p>This page is mypage page. You can check your profile and write a comment.</p>
+        <p>You can use the following command to create a comment.</p>
+        <p class="output">comment [comment]</p>
 
         <br>
         <p>Enter <a href="index.html">home</a> to return the home page.</p>
 
         <br>
-        <p class="output">ID, SCHOOL, SCORE, PROFILE_COMEMT</p>
-        <p>
-            <% for (let i = 0; i < users.length; i++) { %>
-                <span><%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMEMT %></span><br>
-            <% } %>
-        </p>
+        <p>ID : <%= id %></p>
+        <p>SCHOOL : <%= school %></p>
+        <p>SCORE : <%= score %></p>
+        <p>COMMENT : <%= comment %></p>
 
         <br>
         <p id="history">
@@ -41,7 +37,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= user_id %>@<%= user_school %>:/rank$ </span>
+                <span id="user-information"><%= user_id %>@<%= user_school %>:/login$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
