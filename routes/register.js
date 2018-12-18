@@ -4,8 +4,8 @@ const nodemailer = require('nodemailer');
 const db = require('../db/connection');
 const router = express.Router();
 
-router.get('/register',(req,res) => {
-    if(req.session.id){
+router.get('/',(req,res) => {
+    if(!(req.session === undefined)){
         res.render('register.ejs',{
             user_id : req.session.id,
             user_school : req.session.school
@@ -18,11 +18,12 @@ router.get('/register',(req,res) => {
         })
     }
 })
-.post('/register',(req,res) => {
+.post('/',(req,res) => {
+    console.log(req.body);
     const tmpId = req.body.id;
-    const tmpPwd = req.body.pwd;
+    const tmpPwd = req.body.pw;
     const tmpEmail = req.body.email;
-    const tmpSchool = req.body.school
+    const tmpSchool = req.body.school;
     if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool)
         res.send('<script type="text/javascript">alert("입력되지 않은 값이 있습니다.");window.location.reload();</script>');
     else{
@@ -58,7 +59,7 @@ router.get('/register',(req,res) => {
                     transporter.sendMail(mailOptions, (err, response) => {
                         if(err){
                             console.log(err);
-                            res.send('<script type="text/javascript">alert("error");window.location.href("login");</script>');
+                            res.send('<script type="text/javascript">alert("error");window.location.href="login";</script>');
                         }
                         else{
                             console.log(response);

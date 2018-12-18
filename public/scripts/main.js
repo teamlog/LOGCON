@@ -45,38 +45,38 @@ function commandInspection(text) {
                 history.innerHTML += ("<br>" + "cd [path]");
                 break;
             case "cd home":
-                location.href = "index.html";
+                location.href = "/";
                 break;
             case "cd..":
-                location.href = "index.html";
+                location.href = "/";
                 break;
             case "cd ..":
-                location.href = "index.html";
+                location.href = "/";
                 break;
             case "cd challenges":
-                location.href = "challenges.html";
+                location.href = "challenges";
                 break;
             case "cd challenge":
-                location.href = "challenges.html";
+                location.href = "challenges";
                 break;
             case "cd notice":
-                location.href = "notice.html";
+                location.href = "notice";
                 break;
             case "cd rank":
-                location.href = "rank.html";
+                location.href = "rank";
                 break;
             case "cd mypage":
-                location.href = "mypage.html";
+                location.href = "mypage";
                 break;
             case "cd login":
-                location.href = "login.html";
+                location.href = "login";
                 break;
             case "cd register":
-                location.href = "register.html";
+                location.href = "register";
                 break;
             default:
                 history.innerHTML += ("<br>" + "The specified path could not be found.");
-                // location.href = "404.html";
+                // location.href = "404";
         }
 
     // ls
@@ -98,14 +98,14 @@ function commandInspection(text) {
         let dividedLogin = text.split(" ");
         if (dividedLogin[2] == "-p" && dividedLogin.length == 4) {
 
-            path = fetch("$$$$$ 주소 $$$$$", {
+            path = fetch("http://localhost:4000/login", {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     "id": dividedLogin[1],
-                    "pwd": dividedLogin[3]
+                    "pw": dividedLogin[3]
                 })
             })
             .then(function (response) {
@@ -127,17 +127,16 @@ function commandInspection(text) {
         let dividedRegister = text.split(" ");
         if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && dividedRegister.length == 8) {
 
-            path = fetch("$$$$$ 주소 $$$$$", {
+            fetch("http://localhost:4000/register", {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     "id": dividedRegister[1],
-                    "pwd": dividedRegister[3],
+                    "pw": dividedRegister[3],
                     "email": dividedRegister[5],
                     "school": dividedRegister[7]
-
                 })
             })
             .then(function (response) {
@@ -156,10 +155,10 @@ function commandInspection(text) {
         let dividedAuthKey = text.split(" ");
         if (dividedAuthKey.length == 2) {
 
-            path = fetch("$$$$$ 주소 $$$$$", {
+            path = fetch("http://localhost:4000/auth", {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     "key": dividedAuthKey[1],
@@ -202,13 +201,12 @@ function commandInspection(text) {
             }
 
             // 답 전달
-            path = fetch("$$$$$ 주소 $$$$$", {
+            fetch("http://localhost:4000/challenge/" +pid, {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    "id": id,
                     "answer": answer
                 })
             })
@@ -224,10 +222,10 @@ function commandInspection(text) {
             let commentText = text.substring(8);
 
             // 코멘트 전달
-            path = fetch("$$$$$ 주소 $$$$$", {
+            fetch("http://localhost:4000/mypage", {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     "ment": commentText

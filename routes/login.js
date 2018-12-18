@@ -2,8 +2,8 @@ const express = require('express');
 const db = require('../db/connection');
 const router = express.Router();
 
-router.get('/login',(req,res) => {
-    if(req.session.id){
+router.get('/',(req,res) => {
+    if(!(req.session === undefined)){
         res.render('login.ejs',{
             user_id : req.session.id,
             user_school: req.session.school
@@ -16,7 +16,7 @@ router.get('/login',(req,res) => {
         })
     }
 })
-.post('/login',(req,res)=>{
+.post('/',(req,res)=>{
     const id = req.body.id;
     const pw = req.body.pwd;
     async function login(id, pw){

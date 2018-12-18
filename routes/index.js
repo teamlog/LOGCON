@@ -4,7 +4,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  if(req.session.id)
+  if((req.session === undefined)){
+    res.redirect('/login');
+  }   
+  else{
     db.query('select FLAG,SCORE,SCHOOL from Users where ID = ?',req.session.id,(err,result) => {
       if (err) throw err;
       if(result[0].FLAG){
@@ -16,13 +19,8 @@ router.get('/', (req, res) => {
       }
       else
         res.redirect('/auth');
-    })   
-  else
-    res.render('index.ejs',{
-      user_id : 'guest',
-      user_school : 'undifned',
-      score : '0'
-    });
+    })
+  }
 });
 
 module.exports = router;

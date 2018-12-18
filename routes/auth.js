@@ -2,8 +2,8 @@ const express = require('express');
 const db = require('../db/connection');
 const router = express.Router();
 
-router.get('/auth', (req,res) => {
-    if(req.session.id){
+router.get('/', (req,res) => {
+    if(!(req.session === undefined)){
         db.query('select FLAG from Users where id = ?',req.session.id,(err,result) => {
             if(err) throw err;
             if(!result){
@@ -18,7 +18,7 @@ router.get('/auth', (req,res) => {
         })
     }
 })
-.post('/auth', (req,res) => {
+.post('/', (req,res) => {
     const key = req.body.key; 
     db.query('select AUTHKEY from Users where ID = ?',req.session.id,(err,result) => {
         if(err) throw err;

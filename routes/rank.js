@@ -2,10 +2,10 @@ const express = require('express');
 const db = require('../db/connection');
 const router = express.Router();
 
-router.get('/rank',(req,res) => {
+router.get('/',(req,res) => {
     db.query('select SCORE,SCHOOL,ID,PROFILE_COMMENT from Users', (err,result) => {
         if (err) throw err;
-        if(req.session.id){
+        if(!(req.session === undefined)){
             res.render('rank.ejs',{
                 users : result,
                 user_id : req.session.id,

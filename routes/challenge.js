@@ -2,11 +2,11 @@ const express = require('express');
 const db = require('../db/connection');
 const router = express.Router();
 
-router.get('/challenge/:num',(req,res) => {
+router.get('/:num',(req,res) => {
     pnum = req.params.num;
     db.query('select CONTENT,TITLE from Problems where id = ?',num,(err,result) => {
         if(err) throw err;
-        if(req.session.id){
+        if(!(req.session === undefined)){
             res.render('challenge.ejs',{
                 info : result,
                 user_id : req.session.id,
@@ -22,7 +22,7 @@ router.get('/challenge/:num',(req,res) => {
         }
     })
 })
-router.post('/challenge/:num',(req,res) => {
+router.post('/:num',(req,res) => {
     const pid = req.param.num;
     const user = req.session.id;
     const ans = req.body.answer;
@@ -51,10 +51,10 @@ router.post('/challenge/:num',(req,res) => {
     })
 })
 
-router.get('/challenge',(req,res) => {
+router.get('/',(req,res) => {
     db.query('select TITLE from Problems',(err,result) => {
         if(err) throw err;
-        if(req.session.id){
+        if(!(req.session === undefined)){
             res.render('challenges.ejs',{
                 title : result,
                 user_id : req.session.id,

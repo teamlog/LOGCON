@@ -2,8 +2,8 @@ const express = require('express');
 const db = require('../db/connection');
 const router = express.Router();
 
-router.get('/mypage',(req,res) => {
-    if(!req.session.id){
+router.get('/',(req,res) => {
+    if(!(req.session === undefined)){
         res.render('mypage.ejs',{
             id : 'geust',
             school : 'undefined',
