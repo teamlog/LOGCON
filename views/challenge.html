@@ -11,18 +11,27 @@
     <link rel="stylesheet" href="../public/stylesheets/main.css">
     <script src="../public/scripts/main.js"></script>
 
+    <script>
+        let params = new URLSearchParams(location.search);
+        let id = parseInt(params.get("id")); // is the number
+    </script>
     
 </head>
 <body>
     <div class="overlay"></div>
     <div class="terminal">
-        <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
-        <p>This page is register page. You can register using the commands listed below.</p>
-        <p class="output">register [username] -p [password] --email [email] --school [school]</p>
+        <h1><%= title[id] %></h1>
+        <p>You can enter the commands listed below.</p>
+        <p class="output">solve --id=[problem id] --answer=[answer key]</p>
+        <p class="output">solve -i=[problem id] -a=[answer key]</p>
 
         <br>
-        <p>Enter <a href="index.html">home</a> to return the home page.</p>
-        <p>Enter <a href="login.html">login</a> to perform the login.</p>
+        <p>Enter <a href="challenges.html">home</a> to return the home page.</p>
+
+        <br>
+        <p>
+            <%= content[id] %>
+        </p>
 
         <br>
         <p id="history">
@@ -31,7 +40,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= users.ID %>@<%= users.SCHOOL %>:/register$ </span>
+                <span id="user-information"><%= users.ID %>@<%= users.SCHOOL %>:/challenges$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
