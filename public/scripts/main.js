@@ -46,6 +46,12 @@ function commandInspection(text) {
             case "cd home":
                 location.href = "index.html";
                 break;
+            case "cd..":
+                location.href = "index.html";
+                break;
+            case "cd ..":
+                location.href = "index.html";
+                break;
             case "cd challenges":
                 location.href = "challenges.html";
                 break;
