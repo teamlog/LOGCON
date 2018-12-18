@@ -17,12 +17,8 @@
     <div class="overlay"></div>
     <div class="terminal">
         <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
-        <p>This page is login page. You can login using the commands listed below.</p>
-        <p class="output">login [username] -p [password]</p>
-
-        <br>
-        <p>Enter <a href="index.html">home</a> to return the main screen.</p>
-        <p>Enter <a href="register.html">register</a> to perform the register.</p>
+        <p>You need to be authenticated by email before you can login. You can register using the commands listed below.</p>
+        <p class="output">auth [email authentication key]</p>
 
         <br>
         <p id="history">
@@ -31,7 +27,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= id %>@<%= school %>:/login$ </span>
+                <span id="user-information"><%= id %>@<%= school %>:/auth$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>

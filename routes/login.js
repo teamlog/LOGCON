@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('../db/con');
 const router = express.Router();
 
 router.get('/login',(req,res) => {
@@ -9,7 +10,7 @@ router.get('/login',(req,res) => {
     const pw = req.body.pwd;
     async function login(id, pw){
         try{
-            const results = await con.query('select score from users where id = ? and pw = ?',[id,pw]);
+            const results = await db.query('select SCORE from Users where ID = ? and PW = ?',[id,pw]);
         }
         catch(err){
             console.error(err);
@@ -23,5 +24,7 @@ router.get('/login',(req,res) => {
         });
     }
     else
-        res.send('<script type="text/javascript">alert("로그인 실패(ó﹏ò｡)");window.location.href("/");</script>');
+        res.send('<script type="text/javascript">alert("로그인 실패(ó﹏ò｡)");window.location.reload();</script>');
 })
+
+module.exports = router;
