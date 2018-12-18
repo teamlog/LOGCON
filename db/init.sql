@@ -8,13 +8,9 @@ CREATE TABLE Users(
     PW VARCHAR(100),
     SCORE INT DEFAULT 0,
     SCHOOL VARCHAR(100),
-<<<<<<< HEAD
     FLAG INT DEFAULT 0,
     PROFILE_MENT VARCHAR(100),
     AUTHKEY VARCHAR(100)
-=======
-    FLAG INT DEFAULT 0
->>>>>>> bangseonghun
 );
 
 CREATE TABLE Problems(

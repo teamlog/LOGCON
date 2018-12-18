@@ -12,7 +12,7 @@ router.get('/challenge/:num',(req,res) => {
         })
     })
 })
-router.post('/challeng/:num',(req,res) => {
+router.post('/challenge/:num',(req,res) => {
     const pid = req.param.num;
     const user = req.session.id;
     const ans = req.body.answer;
@@ -41,8 +41,13 @@ router.post('/challeng/:num',(req,res) => {
     })
 })
 
-router.get('/problem',(req,res) => {
-    res.render('problemList.html');
+router.get('/challenge',(req,res) => {
+    db.query('select TITLE from Problems',(err,result) => {
+        if(err) throw err;
+        res.render('challenges.ejs',{
+            title : result
+        });
+    })
 })
 
 module.exports = router;
