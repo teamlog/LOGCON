@@ -3,22 +3,35 @@ const db = require('../db/con');
 const router = express.Router();
 
 router.get('/login',(req,res) => {
-    res.render('login.html');
+    if(req.session.id){
+        res.render('login.ejs',{
+            user_id : req.session.id,
+            user_school: req.session.school
+        });
+    }
+    else{
+        res.render('login.ejs',{
+            user_id : 'guest',
+            user_school : 'undefined'
+        })
+    }
 })
 .post('/login',(req,res)=>{
     const id = req.body.id;
     const pw = req.body.pwd;
     async function login(id, pw){
         try{
-            const results = await db.query('select SCORE from Users where ID = ? and PW = ?',[id,pw]);
+            const results = await db.query('select SCHOOL from Users where ID = ? and PW = ?',[id,pw]);
         }
         catch(err){
             console.error(err);
         }
-        return results[0] ? 1:0;
+        return results[0] ? results[0] : 0;
     }
-    if (login(id,pw) === 1){
+    const userInfo = login(id,pw);
+    if (userInfo){
         req.session.user = req.body.id;
+        req.session.school = userInfo;
         req.session.save(() => {
             res.redirect('/');
         });
