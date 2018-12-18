@@ -3,16 +3,16 @@ const express = require('express');
 const db = require('../db/con');
 const router = express.Router();
 
-router.get('/problem/:num',(req,res) => {
+router.get('/challenge/:num',(req,res) => {
     pnum = req.params.num;
     db.query('select CONTENT from Problems where id = ?',num,(err,result) => {
         if(err) throw err;
-        res.render('problem.ejs',{
+        res.render('challenge.ejs',{
             content : result
         })
     })
 })
-router.post('/problem/:num',(req,res) => {
+router.post('/challenge/:num',(req,res) => {
     const pid = req.param.num;
     const user = req.session.id;
     const ans = req.body.answer;
@@ -41,8 +41,13 @@ router.post('/problem/:num',(req,res) => {
     })
 })
 
-router.get('/problem',(req,res) => {
-    res.render('problemList.html');
+router.get('/challenge',(req,res) => {
+    db.query('select TITLE from Problems',(err,result) => {
+        if(err) throw err;
+        res.render('challenges.ejs',{
+            title : result
+        });
+    })
 })
 
 module.exports = router;

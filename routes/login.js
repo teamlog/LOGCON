@@ -17,7 +17,7 @@ router.get('/login',(req,res) => {
         }
         return results[0] ? 1:0;
     }
-    if (login(id,pw)){
+    if (login(id,pw) === 1){
         req.session.user = req.body.id;
         req.session.save(() => {
             res.redirect('/');

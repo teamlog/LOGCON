@@ -13,6 +13,9 @@ const myPageRouter = require('./routes/mypage');
 const noticeRouter = require('./routes/notice');
 const loginRouter = require('./routes/login');
 const problemRouter = require('./routes/problem');
+const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
+const registerRouter = require('./routes/register');
 const helmet = require('helmet');
 
 app.use('/', indexRouter);
@@ -20,8 +23,10 @@ app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
 app.use('/notice', noticeRouter);
 app.use('/login',loginRouter);
-app.use('/problem',problemRouter);
-app.set('views', path.join(__dirname, 'public'));
+app.use('/challenge',problemRouter);
+app.use('/auth',authRouter);
+app.use('/admin',adminRouter);
+app.use('/register',registerRouter);
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'html')));
@@ -35,11 +40,8 @@ app.use(session({
   resave: false,  //재접속 시 세션아이디 재발급x
   saveUninitialized: true,  //세션 사용 전까지 세션아이디 발급x
 }));
-app.use(passport.initialize()); // passport 구동
-app.use(passport.session()); // 세션 연결
 app.use(express.static(path.join(__dirname, 'html')));
-app.use(helmet());
-passportConfig(); 
+app.use(helmet()); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -57,6 +59,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log("connect");
 });
+
+module.exports = app;
