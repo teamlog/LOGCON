@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/rank',(req,res) => {
     db.query('select SCORE,SCHOOL,ID,PROFILE_COMENT from Users', (err,result) => {
         if (err) throw err;
-        res.render('mypage.ejs',{
+        res.render('rank.ejs',{
             users : result
         })
     })

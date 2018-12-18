@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.get('/challenge/:num',(req,res) => {
     pnum = req.params.num;
-    db.query('select CONTENT from Problems where id = ?',num,(err,result) => {
+    db.query('select CONTENT,TITLE from Problems where id = ?',num,(err,result) => {
         if(err) throw err;
         res.render('challenge.ejs',{
-            content : result
+            info : result
         })
     })
 })
