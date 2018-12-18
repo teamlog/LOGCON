@@ -25,6 +25,14 @@
         <p>Enter <a href="index.html">home</a> to return the main screen.</p>
 
         <br>
+        <p>
+            <% for (var i = 0; i < title.length; i++) { %>
+                <% if (i % 6 == 0) { %>
+                    <%= <br> %>
+                <% } %>
+                <a href="challenge.html?id=<%= i %>"><%= title[i] %></a> 
+            <% } %>
+        </p>
 
         <br>
         <p id="history">
@@ -33,7 +41,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= id %>@<%= school %>:/login$ </span>
+                <span id="user-information"><%= id %>@<%= school %>:/challenges$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
