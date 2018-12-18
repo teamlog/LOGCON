@@ -1,11 +1,22 @@
 const express = require('express');
 const randomstring = require('randomstring');
 const nodemailer = require('nodemailer');
-const db = require('../db/con');
+const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/register',(req,res) => {
-    res.render('register.html');
+    if(req.session.id){
+        res.render('register.ejs',{
+            user_id : req.session.id,
+            user_school : req.session.school
+        });
+    }
+    else{
+        res.render('register.ejs',{
+            user_id : 'guest',
+            user_school : 'undefined'
+        })
+    }
 })
 .post('/register',(req,res) => {
     const tmpId = req.body.id;
