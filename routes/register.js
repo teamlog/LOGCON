@@ -1,7 +1,7 @@
 const express = require('express');
 const randomstring = require('randomstring');
 const nodemailer = require('nodemailer');
-const db = require('../db/con');
+const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/register',(req,res) => {

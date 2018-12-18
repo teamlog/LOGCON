@@ -1,6 +1,5 @@
-
 const express = require('express');
-const db = require('../db/con');
+const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/challenge/:num',(req,res) => {
