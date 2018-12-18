@@ -58,7 +58,7 @@ function commandInspection(text) {
             case "cd challenge":
                 location.href = "challenges.html";
                 break;
-            case "cd board":
+            case "cd notice":
                 location.href = "notice.html";
                 break;
             case "cd rank":
@@ -72,7 +72,7 @@ function commandInspection(text) {
                 break;
             default:
                 history.innerHTML += ("<br>" + "The specified path could not be found.");
-                location.href = "404.html";
+                // location.href = "404.html";
         }
 
     // ls

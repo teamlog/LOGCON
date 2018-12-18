@@ -20,7 +20,7 @@
 <body>
     <div class="overlay"></div>
     <div class="terminal">
-        <h1><%= title[id] %></h1>
+        <h1><%= info[id].TITLE %></h1>
         <p>You can enter the commands listed below.</p>
         <p class="output">solve --id=[problem id] --answer=[answer key]</p>
         <p class="output">solve -i=[problem id] -a=[answer key]</p>
@@ -30,7 +30,7 @@
 
         <br>
         <p>
-            <%= content[id] %>
+            <%= info[id].CONTENTS %>
         </p>
 
         <br>
@@ -40,7 +40,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= users.ID %>@<%= users.SCHOOL %>:/challenges$ </span>
+                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[id].TITLE %>$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
