@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/:num',(req,res) => {
     pnum = req.params.num;
-    db.query('select CONTENTS,TITLE from Problems where id = ?',num,(err,result) => {
+    db.query('select CONTENTS,TITLE,SCORE from Problems where id = ?',num,(err,result) => {
         if(err) throw err;
         if(!(req.session === undefined)){
             res.render('challenge.ejs',{
@@ -49,13 +49,13 @@ router.post('/:num',(req,res) => {
 })
 
 router.get('/',(req,res) => {
-    db.query('select TITLE from Problems',(err,result) => {
+    db.query('select TITLE,SCORE from Problems',(err,result) => {
         if(err) throw err;
         if(!(req.session.user === undefined)){
             res.render('challenges.ejs',{
-                title : result,
+                info : result,
                 user_id : req.session.user,
-                user_school: req.session.school
+                user_school: req.session.school,
             })
         }
         else{

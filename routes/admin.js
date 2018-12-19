@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../db/connection');
 const path = require('path');
 const router  = express.Router();
+const moment = require('moment');
 
 router.get('/',(req,res) => {
     if(!(req.session.user == 'admin'))
@@ -36,7 +37,8 @@ router.post('/insertP',(req,res) => {
 router.post('/upNotice',(req,res) => {
     const title = req.body.title;
     const content = req.body.content;
-    db.query('insert into Notice (TITLE,CONTENTS) values(?,?)',[title,content]);  
+    const time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    db.query('insert into Notice (TITLE,CONTENTS,TIME) values(?,?,?)',[title,content,time]);  
 })
 
 module.exports = router;
