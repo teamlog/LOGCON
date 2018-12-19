@@ -25,11 +25,11 @@
         <p>This page is home page. You can see the announcements announced in this competition.</p>
 
         <br>
-        <p>Enter <a href="index.html">home</a> to return the main screen.</p>
+        <p>Enter <a href="/">home</a> to return the main screen.</p>
 
-        <% for (let i = 0; i < notice[i]; i++) { %>
+        <% for (let i = 0; i < notice.length; i++) { %>
             <br>
-            <p class="output"><%= notice[i].title %></p>
+            <p class="output"><%= notice[i].TITLE %></p>
             <p><%= notice[i].CONTENTS %></p>
         <% } %>
 

@@ -26,15 +26,15 @@
         <p class="output">solve -i=[problem id] -a=[answer key]</p>
 
         <br>
-        <p>Enter <a href="index.html">home</a> to return the home page.</p>
+        <p>Enter <a href="/">home</a> to return the home page.</p>
 
         <br>
         <p>
-            <% for (var i = 0; i < title.length; i++) { %>
+            <% for (var i = 1; i < title.length; i++) { %>
                 <% if (i % 6 == 0) { %>
-                    <%= <br> %>
+                    <br>
                 <% } %>
-                <a href="challenge.html?id=<%= i %>"><%= title[i] %></a> 
+                <a href="challenge/?id=<%= i %>"><%= title[i] %></a> 
             <% } %>
         </p>
 

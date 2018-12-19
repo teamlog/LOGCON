@@ -23,50 +23,55 @@ router.get('/',(req,res) => {
     const tmpPwd = req.body.pw;
     const tmpEmail = req.body.email;
     const tmpSchool = req.body.school;
-    var flag = 1;
-    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool)
-        res.json({message: "입력되지 않은 값이 있습니다."});    
-    else{
-        db.query('select SCORE from Users where ID = ?', tmpId, (err, result) => {
-            console.log('fuck');
-			if(err) console.error(err);
-			if(!(result.length==0))
-      	        res.json({message: "중복되는 아이디입니다."});
-            else 
-                flag = 1;
-        })
+    function emailCheck(){
+        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        // 검증에 사용할 정규식 변수 regExp에 저장
+        if (tmpEmail.match(regExp) != null) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
-    if(flag){
-        db.query('select SCORE from Users where EMAIL = ?',tmpEmail, (error,results) => {
-            if(error) throw error;
-            if(!(results.length===0))
-                res.json({message: "중복되는 이메일입니다."});
+    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === ''){
+        res.json({message: "입력되지 않은 값이 있습니다."});
+    }    
+    if(emailCheck){
+        db.query('select SCORE from Users where ID = ?', tmpId, (err, result) => {
+			if(err) console.error(err);
+			if(!(result.length===0))
+                res.json({success: false});
             else{
-                const authkey = randomstring.generate();
-                db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey]);
-                const transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                        user: 'teamlogsr@gamil.com', 
-                        pass: 'teamlogzzang2017'
-                    }
-                });
-                const mailOptions = {
-                    from: 'teamlogsr@gmail.com',
-                    to: tmpEmail ,
-                    subject: 'LOGCON 인증',
-                    text: '가입완료를 위해 <'+authStr+'> 를 입력해주세요'
-                };
-                transporter.sendMail(mailOptions, (err, response) => {
-                    if(err){
-                        console.log(err);
-                        res.json({message: "error."});
-                    }
+                db.query('select SCORE from Users where EMAIL = ?',tmpEmail, (error,results) => {
+                    if(error) throw error;
+                    if(!(results.length===0))
+                        res.json({success: false});
                     else{
-                        console.log(response);
-                        res.json({message: "회원가입완료!"});
-                    }   
-                })    
+                        const authkey = randomstring.generate();
+                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey]);
+                        const transporter = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                user: 'teamlogsr@gmail.com', 
+                                pass: 'teamlogzzang2017'
+                            }
+                        });
+                        const mailOptions = {
+                            from: 'teamlogsr@gmail.com',
+                            to: tmpEmail ,
+                            subject: 'LOGCON 인증',
+                            text: '가입완료를 위해 <'+authkey+'> 를 입력해주세요'
+                        };
+                        transporter.sendMail(mailOptions, (err, response) => {
+                            if(err)
+                                console.log(err);
+                            else{
+                                console.log('sibal',response);
+                                res.json({success: false});
+                            }   
+                        })    
+                    }
+                })
             }
         })
     }

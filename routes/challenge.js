@@ -14,11 +14,7 @@ router.get('/:num',(req,res) => {
             })
         }
         else{
-            res.render('challenge.ejs',{
-                info : result,
-                user_id : 'guest',
-                user_school: 'undefined'            
-            })
+            res.redirect('/');
         }
     })
 })
@@ -62,11 +58,7 @@ router.get('/',(req,res) => {
             })
         }
         else{
-            res.render('challenges.ejs',{
-                title : result,
-                user_id : 'guest',
-                user_school : 'undefiend'
-            })
+            res.redirect('/');
         }
     })
 })

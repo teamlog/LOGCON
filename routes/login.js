@@ -22,22 +22,19 @@ router.get('/',(req,res) => {
     db.query('select *from Users where ID = ?', id, (err, result) => {
 		if (err) throw err;
         if(result.length === 0){
-              res.json({message:'존재하지 않는 아이디입니다.'});
-              console.log('sibal');
+              res.json({success : false});
         }
         else {
-      	    if (pw === result[0].PW){                 
-                console.log('sival'); 
+      	    if (pw === result[0].PW){; 
                 req.session.user = id;
                 req.session.school = result[0].SCHOOL;
                 console.log(req.session.user,req.session.school,pw);
                 req.session.save(() => {
-                    res.redirect('/');
+                    res.json({success : true});
 			    })
             }
             else{
-                res.json({message : "로그인 실패(ó﹏ò｡)"});
-                console.log('seebal');
+                res.json({success : false});
             }
         }    
     })

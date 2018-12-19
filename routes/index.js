@@ -5,20 +5,30 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', (req, res) => {
   if((req.session.user === undefined)){
-    res.redirect('/login');
+    res.render('index.ejs',{
+      score : '0',
+      user_id : 'guest',
+      user_school: 'undefined'
+    });
   }
   else{
-    db.query('select FLAG,SCORE,SCHOOL from Users where ID = ?',req.session.id,(err,result) => {
+    db.query('select FLAG,SCORE,SCHOOL from Users where ID = ?',req.session.user,(err,result) => {
       if (err) throw err;
       if(!(result[0].FLAG)){
         res.render('index.ejs',{
           score : result[0].SCORE,
           user_id : req.session.user,
-          user_school: result[0].SCHOOL
+          user_school: result[0].SCHOOL,
+          auth : true
         });
       }
       else
-        res.redirect('/auth');
+        res.render('index.ejs',{
+          score : result[0].SCORE,
+          user_id : req.session.user,
+          user_school: result[0].SCHOOL,
+          auth : false
+        })
     })
   }
 });
