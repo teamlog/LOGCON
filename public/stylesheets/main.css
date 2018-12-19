@@ -118,6 +118,11 @@ a::after {
     text-shadow: 0 0 1px rgba(51, 255, 51, 0.4), 0 0 2px rgba(255, 255, 255, 0.8);
     background-color: #00000000;
 }
+
+.notice {
+    font-size: 1.4rem;
+}
+
 .display-none {
     display: none;
 }

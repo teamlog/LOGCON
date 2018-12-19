@@ -29,8 +29,8 @@
 
         <% for (let i = 0; i < notice.length; i++) { %>
             <br>
-            <p class="output"><%= notice[i].TITLE %></p>
-            <p><%= notice[i].CONTENTS %></p>
+            <p class="output notice"><%= notice[i].TITLE %></p>
+            <p class="notice"><%= notice[i].CONTENTS %> - <%= notice[i].DATA %></p>
         <% } %>
 
         <br>

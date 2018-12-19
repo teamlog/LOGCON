@@ -19,12 +19,11 @@
 <body>
     <div class="overlay"></div>
     <div class="terminal">
-        <h1><%= info[pid].TITLE %></h1>
-        <p class="output">Problem ID : <%= pid %></p>
+        <h1><span class="errorcode"><%= info[pid].TITLE %></span> - <%= info[pid].SCORE %></h1>
 
         <p>You can enter the commands listed below.</p>
-        <p class="output">solve --id=[problem id] --answer=[answer key]</p>
-        <p class="output">solve -i=[problem id] -a=[answer key]</p>
+        <p class="output">solve --answer=[answer key]</p>
+        <p class="output">solve -a=[answer key]</p>
 
         <br>
         <p>Enter <a href="/challenge">challenges</a> to return the challenges page.</p>

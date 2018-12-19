@@ -21,9 +21,7 @@
     <div class="overlay"></div>
     <div class="terminal">
         <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
-        <p>This page is challenges page. You can enter the correct answer using the commands listed below by going into the problem page.</p>
-        <p class="output">solve --id=[problem id] --answer=[answer key]</p>
-        <p class="output">solve -i=[problem id] -a=[answer key]</p>
+        <p>You can choose one of the problems listed below and get your score by fixing the problem.</p>
 
         <br>
         <p>Enter <a href="/">home</a> to return the home page.</p>
@@ -34,7 +32,7 @@
                 <% if (i % 6 == 0) { %>
                     <br>
                 <% } %>
-                <a href="challenge/?id=<%= i %>"><%= title[i] %></a> 
+                <a href="challenge/<%= i %>"><%= title[i] %> - <%= title[i].스코어 %></a> 
             <% } %>
         </p>
 

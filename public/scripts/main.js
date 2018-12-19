@@ -112,7 +112,11 @@ function commandInspection(text) {
                 return response.json();
             })
             .then(function (myJSON) {
-
+                if (myJSON.success) {
+                    history.innerHTML += ("<br>" + "Login success!");
+                } else {
+                    history.innerHTML += ("<br>" + "Login fail!");
+                }
             })
 
         } else {
@@ -143,7 +147,11 @@ function commandInspection(text) {
                 return response.json();
             })
             .then(function (myJSON) {
-
+                if (myJSON.success) {
+                    history.innerHTML += ("<br>" + "Register success!");
+                } else {
+                    history.innerHTML += ("<br>" + "Register fail!");
+                }
             })
 
         } else {
@@ -175,27 +183,27 @@ function commandInspection(text) {
         }
 
     // solve (answer)
-    // solve --id=1 --answer=이것은답이다
-    // sovle -i=1 -a=이것은답이다
+    // solve --answer=이것은답이다
+    // sovle -a=이것은답이다
     } else if (text.match(solve) != null) {
         let dividedSolve = text.split(" ");
-        let id, answer;
-        if ((dividedSolve[1].match(/^--id\=|-i\=/) != null) && (dividedSolve[2].match(/^--answer\=|^-a\=/)) && (dividedSolve.length == 3)) {
+        let id, answer = null;
+        if ((dividedSolve[1].match(/^--answer\=|^-a\=/)) && (dividedSolve.length == 2)) {
 
             // id 검사
-            if (dividedSolve[1].match(/^--id\=/) != null) {
-                id = dividedSolve[1].substring(5);
-            } else if (dividedSolve[1].match(/^-i\=/) != null) {
-                id = dividedSolve[1].substring(3);
-            } else {
-                history.innerHTML += ("<br>" + "id syntax is strange.");
-            }
+            // if (dividedSolve[1].match(/^--id\=/) != null) {
+            //     id = dividedSolve[1].substring(5);
+            // } else if (dividedSolve[1].match(/^-i\=/) != null) {
+            //     id = dividedSolve[1].substring(3);
+            // } else {
+            //     history.innerHTML += ("<br>" + "id syntax is strange.");
+            // }
 
             // answer 검사
-            if (dividedSolve[2].match(/^--answer\=/) != null) {
-                answer = dividedSolve[2].substring(9);
-            } else if (dividedSolve[2].match(/^-a\=/) != null) {
-                answer = dividedSolve[2].substring(3);
+            if (dividedSolve[1].match(/^--answer\=/) != null) {
+                answer = dividedSolve[1].substring(9);
+            } else if (dividedSolve[1].match(/^-a\=/) != null) {
+                answer = dividedSolve[1].substring(3);
             } else {
                 history.innerHTML += ("<br>" + "answer syntax is strange.");
             }
@@ -214,7 +222,7 @@ function commandInspection(text) {
                 return response.json();
             })
             .then(function (myJSON) {
-
+                history.innerHTML += ("<br>" + myJSON.solve);
             })
         }
 
