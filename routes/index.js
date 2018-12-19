@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
       score : '0',
       user_id : 'guest',
       user_school: 'undefined',
-      auth : 'guest'
+      auth : 'true'
     });
   }
   else{
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
           score : result[0].SCORE,
           user_id : req.session.user,
           user_school: result[0].SCHOOL,
-          auth : true
+          auth : 'true'
         });
       }
       else
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
           score : result[0].SCORE,
           user_id : req.session.user,
           user_school: result[0].SCHOOL,
-          auth : false
+          auth : 'false'
         })
     })
   }
