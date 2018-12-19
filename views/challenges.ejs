@@ -28,11 +28,11 @@
 
         <br>
         <p>
-            <% for (var i = 1; i < title.length; i++) { %>
+            <% for (var i = 1; i <= info.length; i++) { %>
                 <% if (i % 6 == 0) { %>
                     <br>
                 <% } %>
-                <a href="challenge/<%= i %>"><%= title[i] %> - <%= title[i].스코어 %></a> 
+                <a href="challenge/<%= i %>"><%= info[i].TITLE %> - <%= info[i].SCORE %></a> 
             <% } %>
         </p>
 
