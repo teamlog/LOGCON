@@ -16,9 +16,7 @@
     <script src="scripts/main.js"></script>
 
     <script>
-        let auth = <%= auth %>;
-
-        if (!auth) {
+        if (!<%= auth %>) {
             Local.href = "auth";
         }
     </script>

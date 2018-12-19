@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="stylesheets/main.css">
     <script src="scripts/main.js"></script>
 
-    
 </head>
 <body>
     <div class="overlay"></div>
@@ -30,7 +29,7 @@
         <% for (let i = 0; i < notice.length; i++) { %>
             <br>
             <p class="output notice"><%= notice[i].TITLE %></p>
-            <p class="notice"><%= notice[i].CONTENTS %> - <%= notice[i].DATA %></p>
+            <p class="notice"><%= notice[i].CONTENTS %> - <%= notice[i].TIME %></p>
         <% } %>
 
         <br>
