@@ -148,7 +148,7 @@ function commandInspection(text) {
             })
             .then(function (myJSON) {
                 if (myJSON.success) {
-                    history.innerHTML += ("<br>" + "Register success!");
+                    history.innerHTML += ("<br>" + "Register success! Go to login page and log in.");
                 } else {
                     history.innerHTML += ("<br>" + "Register fail!");
                 }
