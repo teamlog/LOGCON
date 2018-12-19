@@ -216,31 +216,31 @@ function commandInspection(text) {
             .then(function (myJSON) {
 
             })
-
-        // comment
-        } else if (text.match(comment) != null) {
-            let commentText = text.substring(8);
-
-            // 코멘트 전달
-            fetch("http://localhost:4000/mypage", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "ment": commentText
-                })
-            })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJSON) {
-
-            })
-
-        } else {
-            history.innerHTML += ("<br>" + "The solve statement is strange.");
         }
+
+    // comment
+    } else if (text.match(comment) != null) {
+        let commentText = text.substring(8);
+
+        // 코멘트 전달
+        fetch("http://localhost:4000/mypage", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "ment": commentText
+            })
+        })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJSON) {
+
+        })
+
+    } else {
+        history.innerHTML += ("<br>" + "The solve statement is strange.");
     }
     
     

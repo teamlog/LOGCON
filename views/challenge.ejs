@@ -14,17 +14,12 @@
     <!-- Server -->
     <link rel="stylesheet" href="stylesheets/main.css">
     <script src="scripts/main.js"></script>
-
-    <script>
-        let params = new URLSearchParams(location.search);
-        let id = parseInt(params.get("id")); // is the number
-    </script>
     
 </head>
 <body>
     <div class="overlay"></div>
     <div class="terminal">
-        <h1><%= info[id].TITLE %></h1>
+        <h1><%= info[pid].TITLE %></h1>
         <p>You can enter the commands listed below.</p>
         <p class="output">solve --id=[problem id] --answer=[answer key]</p>
         <p class="output">solve -i=[problem id] -a=[answer key]</p>
@@ -34,7 +29,7 @@
 
         <br>
         <p>
-            <%= info[id].CONTENTS %>
+            <%= info[pid].CONTENTS %>
         </p>
 
         <br>
@@ -44,7 +39,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[id].TITLE %>$ </span>
+                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[pid].TITLE %>$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>

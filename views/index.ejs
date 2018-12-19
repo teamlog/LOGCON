@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="stylesheets/main.css">
     <script src="scripts/main.js"></script>
 
+    <script>
+        let auth = <%= auth %>;
+
+        if (!auth) {
+            Local.href = "auth";
+        }
+    </script>
     
 </head>
 <body>
