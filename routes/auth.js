@@ -4,12 +4,13 @@ const router = express.Router();
 
 router.get('/', (req,res) => {
     if(!(req.session.user === undefined)){
-        db.query('select FLAG from Users where id = ?',req.session.id,(err,result) => {
+        db.query('select FLAG from Users where id = ?',req.session.user,(err,result) => {
             if(err) throw err;
-            if(!result){
+            console.log(result[0].FLAG);
+            if(!(result[0].FLAG)){
                 res.render('auth.ejs',{
-                    user_id : req.session.user,
-                    user_school : req.session.school
+                    id : req.session.user,
+                    school : req.session.school
                 });
             }
             else{
@@ -20,10 +21,10 @@ router.get('/', (req,res) => {
 })
 .post('/', (req,res) => {
     const key = req.body.key; 
-    db.query('select AUTHKEY from Users where ID = ?',req.session.id,(err,result) => {
+    db.query('select AUTHKEY from Users where ID = ?',req.session.user,(err,result) => {
         if(err) throw err;
         if(key === result){
-            db.query('update Users set FLAG=1 where ID = ?',req.session.id);
+            db.query('update Users set FLAG=1 where ID = ?',req.session.user);
             res.redirect('/');
         }
         else

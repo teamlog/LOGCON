@@ -9,7 +9,7 @@ router.get('/:num',(req,res) => {
         if(!(req.session === undefined)){
             res.render('challenge.ejs',{
                 info : result,
-                user_id : req.session.id,
+                user_id : req.session.user,
                 user_school: req.session.school,
                 pid : pnum 
             })
@@ -21,7 +21,7 @@ router.get('/:num',(req,res) => {
 })
 router.post('/:num',(req,res) => {
     const pid = req.param.num;
-    const user = req.session.id;
+    const user = req.session.user;
     const ans = req.body.answer;
     function solveCheck(pid, user){
         db.query('select * from Solved where PID = ? and USER = ?',[pid,user],(err,result) => {

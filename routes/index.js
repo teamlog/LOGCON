@@ -23,13 +23,14 @@ router.get('/', (req, res) => {
           auth : 'true'
         });
       }
-      else
+      else{
         res.render('index.ejs',{
           score : result[0].SCORE,
           user_id : req.session.user,
           user_school: result[0].SCHOOL,
           auth : 'false'
         })
+      }
     })
   }
 });
