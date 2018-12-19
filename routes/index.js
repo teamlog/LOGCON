@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
     res.render('index.ejs',{
       score : '0',
       user_id : 'guest',
-      user_school: 'undefined'
+      user_school: 'undefined',
+      auth : 'guest'
     });
   }
   else{
