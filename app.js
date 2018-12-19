@@ -15,7 +15,7 @@ const adminRouter = require('./routes/admin');
 const registerRouter = require('./routes/register');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-
+const logoutRouter = require('./routes/logout');
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,12 +36,13 @@ app.use('/challenge',challengeRouter);
 app.use('/auth',authRouter);
 app.use('/admin',adminRouter);
 app.use('/register',registerRouter);
+app.use('/logout',logoutRouter);
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));
-// app.use(helmet()); 
+app.use(helmet()); 
 
 // catch 404 and forward to error handler
 //app.use(function(req, res, next) {

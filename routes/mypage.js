@@ -3,7 +3,7 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/',(req,res) => {
-    if(!(req.session === undefined)){
+    if(!(req.session.user === undefined)){
         res.render('mypage.ejs',{
             id : 'geust',
             school : 'undefined',

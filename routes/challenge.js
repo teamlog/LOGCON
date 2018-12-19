@@ -54,10 +54,10 @@ router.post('/:num',(req,res) => {
 router.get('/',(req,res) => {
     db.query('select TITLE from Problems',(err,result) => {
         if(err) throw err;
-        if(!(req.session === undefined)){
+        if(!(req.session.user === undefined)){
             res.render('challenges.ejs',{
                 title : result,
-                user_id : req.session.id,
+                user_id : req.session.user,
                 user_school: req.session.school
             })
         }
