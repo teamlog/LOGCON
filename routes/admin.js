@@ -1,26 +1,27 @@
 const express = require('express');
 const db = require('../db/connection');
+const path = require('path');
 const router  = express.Router();
 
 router.get('/',(req,res) => {
-    if(!(req.session.id === 'admin'))
+    if(!(req.session.user == 'admin'))
         res.send('<script type="text/javascript">alert("관리자가 아니시군요?٩(๑`ȏ´๑)۶");window.location.href="/";</script>');
     else
-        res.render('admin.html');
+        res.sendFile(path.join(__dirname,'../views', 'admin.html'));
 })
 
 router.get('/insertP',(req,res) => {
-    if(!(req.session.id === 'admin'))
+    if(!(req.session.user === 'admin'))
         res.send('<script type="text/javascript">alert("관리자가 아니시군요?٩(๑`ȏ´๑)۶");window.location.href="/";</script>');
     else
-        res.render('insertP.html');
+        res.sendFile(path.join(__dirname,'../views', 'insertP.html'));
 })
 
-router.get('/notice',(req,res) => {
-    if(!(req.session.id === 'admin'))
+router.get('/upNotice',(req,res) => {
+    if(!(req.session.user === 'admin'))
         res.send('<script type="text/javascript">alert("관리자가 아니시군요?٩(๑`ȏ´๑)۶");window.location.href="/";</script>');
     else
-        res.render('upNotice.html');
+    res.sendFile(path.join(__dirname,'../views', 'upNotice.html'));
 })
 
 
@@ -28,14 +29,14 @@ router.post('/insertP',(req,res) => {
     const title = req.body.title;
     const content = req.body.content;
     const answer = req.body.answer;
-    const score = req.body.socre;
-    db.query('insert (TITLE,CONTENT,ANSWER,SCORE) values(?,?,?,?)',[title,content,answer,score]);  
+    const score = req.body.score;
+    db.query('insert into Problems (TITLE,CONTENTS,ANSWER,SCORE) values(?,?,?,?)',[title,content,answer,score]);  
 })
 
-router.post('/notice',(req,res) => {
+router.post('/upNotice',(req,res) => {
     const title = req.body.title;
     const content = req.body.content;
-    db.query('insert (TITLE,CONTENT) values(?,?)',[title,content]);  
+    db.query('insert into Notice (TITLE,CONTENTS) values(?,?)',[title,content]);  
 })
 
 module.exports = router;

@@ -3,9 +3,9 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/',(req,res) => {
-    if(!(req.session === undefined)){
+    if(!(req.session.user === undefined)){
         res.render('login.ejs',{
-            user_id : req.session.id,
+            user_id : req.session.user,
             user_school: req.session.school
         });
     }
@@ -18,26 +18,26 @@ router.get('/',(req,res) => {
 })
 .post('/',(req,res)=>{
     const id = req.body.id;
-    const pw = req.body.pwd;
-    async function login(id, pw){
-        try{
-            const results = await db.query('select SCHOOL from Users where ID = ? and PW = ?',[id,pw]);
+    const pw = req.body.pw;
+    db.query('select *from Users where ID = ?', id, (err, result) => {
+		if (err) throw err;
+        if(result.length === 0){
+              res.json({success : false});
         }
-        catch(err){
-            console.error(err);
-        }
-        return results[0] ? results[0] : 0;
-    }
-    const userInfo = login(id,pw);
-    if (userInfo){
-        req.session.user = req.body.id;
-        req.session.school = userInfo;
-        req.session.save(() => {
-            res.redirect('/');
-        });
-    }
-    else
-        res.send('<script type="text/javascript">alert("로그인 실패(ó﹏ò｡)");window.location.reload();</script>');
+        else {
+      	    if (pw === result[0].PW){; 
+                req.session.user = id;
+                req.session.school = result[0].SCHOOL;
+                console.log(req.session.user,req.session.school,pw);
+                req.session.save(() => {
+                    res.json({success : true});
+			    })
+            }
+            else{
+                res.json({success : false});
+            }
+        }    
+    })
 })
 
 module.exports = router;

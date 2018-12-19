@@ -5,10 +5,10 @@ const router = express.Router();
 router.get('/',(req,res) => {
     db.query('select * from Notice', (err,result) => {
         if (err) throw err;
-        if(!(req.session === undefined)){
+        if(!(req.session.user === undefined)){
             res.render('notice.ejs',{
                 notice : result,
-                user_id : req.session.id,
+                user_id : req.session.user,
                 user_school: req.session.school
             })
         }

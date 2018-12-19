@@ -3,12 +3,12 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/', (req,res) => {
-    if(!(req.session === undefined)){
+    if(!(req.session.user === undefined)){
         db.query('select FLAG from Users where id = ?',req.session.id,(err,result) => {
             if(err) throw err;
             if(!result){
                 res.render('auth.ejs',{
-                    user_id : req.session.id,
+                    user_id : req.session.user,
                     user_school : req.session.school
                 });
             }

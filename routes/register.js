@@ -5,9 +5,9 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/',(req,res) => {
-    if(!(req.session === undefined)){
+    if(!(req.session.user === undefined)){
         res.render('register.ejs',{
-            user_id : req.session.id,
+            user_id : req.session.user,
             user_school : req.session.school
         });
     }
@@ -19,56 +19,61 @@ router.get('/',(req,res) => {
     }
 })
 .post('/',(req,res) => {
-    console.log(req.body);
     const tmpId = req.body.id;
     const tmpPwd = req.body.pw;
     const tmpEmail = req.body.email;
     const tmpSchool = req.body.school;
-    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool)
-        res.send('<script type="text/javascript">alert("입력되지 않은 값이 있습니다.");window.location.reload();</script>');
-    else{
-        db.query('select SCORE from Users where ID = ?', tmpId, (err, result) => {
-			if(err) throw err
-			if(!(result.length===0))
-      	        res.send('<script type="text/javascript">alert("중복되는 아이디입니다.");window.location.reload();</script>');
-            else {
-                const flag = 1;
-      	    }
-		})
-        if(flag){
-            db.query('select SCORE from Users where EMAIL = ?',tmpEmail, (err,result) => {
-                if(err) throw err;
-                if(!(result.length===0))
-                    res.send('<script type="text/javascript">alert("중복되는 이메일입니다.");window.location.reload();</script>');
-                else {
-                    const authkey = randomstring.generate();
-                    db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey]);
-                    const transporter = nodemailer.createTransport({
-                        service: 'gmail',
-                        auth: {
-                            user: 'teamlogsr@gamil.com', 
-                            pass: 'teamlogzzang2017'
-                        }
-                    });
-                    const mailOptions = {
-                        from: 'teamlogsr@gmail.com',
-                        to: email ,
-                        subject: 'LOGCON 인증',
-                        text: '가입완료를 위해 <'+authStr+'> 를 입력해주세요'
-                    };
-                    transporter.sendMail(mailOptions, (err, response) => {
-                        if(err){
-                            console.log(err);
-                            res.send('<script type="text/javascript">alert("error");window.location.href="login";</script>');
-                        }
-                        else{
-                            console.log(response);
-                            res.send('<script type="text/javascript">alert("회원가입 성공!");window.location.href="login";</script>');
-                        }   
-                    })    
-                }
-            })
+    function emailCheck(){
+        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        // 검증에 사용할 정규식 변수 regExp에 저장
+        if (tmpEmail.match(regExp) != null) {
+            return 1;
         }
+        else {
+            return 0;
+        }
+    }
+    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === ''){
+        res.json({message: "입력되지 않은 값이 있습니다."});
+    }    
+    if(emailCheck){
+        db.query('select SCORE from Users where ID = ?', tmpId, (err, result) => {
+			if(err) console.error(err);
+			if(!(result.length===0))
+                res.json({success: false});
+            else{
+                db.query('select SCORE from Users where EMAIL = ?',tmpEmail, (error,results) => {
+                    if(error) throw error;
+                    if(!(results.length===0))
+                        res.json({success: false});
+                    else{
+                        const authkey = randomstring.generate();
+                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey]);
+                        const transporter = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                user: 'teamlogsr@gmail.com', 
+                                pass: 'teamlogzzang2017'
+                            }
+                        });
+                        const mailOptions = {
+                            from: 'teamlogsr@gmail.com',
+                            to: tmpEmail ,
+                            subject: 'LOGCON 인증',
+                            text: '가입완료를 위해 <'+authkey+'> 를 입력해주세요'
+                        };
+                        transporter.sendMail(mailOptions, (err, response) => {
+                            if(err)
+                                console.log(err);
+                            else{
+                                console.log('sibal',response);
+                                res.json({success: false});
+                            }   
+                        })    
+                    }
+                })
+            }
+        })
     }
 })
 
