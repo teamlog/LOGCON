@@ -16,8 +16,8 @@
     <script src="scripts/main.js"></script>
 
     <script>
-        if (!<%= auth %>) {
-            Local.href = "auth";
+        if (<%= auth %> == "false") {
+            location.href = "auth";
         }
     </script>
     
