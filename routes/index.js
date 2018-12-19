@@ -13,25 +13,17 @@ router.get('/', (req, res) => {
     });
   }
   else{
-    db.query('select FLAG,SCORE,SCHOOL from Users where ID = ?',req.session.user,(err,result) => {
-      if (err) throw err;
-      if(!(result[0].FLAG)){
+    if(!(req.session.flag)){
+        res.redirect('/auth');
+        console.log(req.session.flag);
+    }
+    else{
         res.render('index.ejs',{
-          score : result[0].SCORE,
+          score : req.session.score,
           user_id : req.session.user,
-          user_school: result[0].SCHOOL,
-          auth : 'true'
-        });
-      }
-      else{
-        res.render('index.ejs',{
-          score : result[0].SCORE,
-          user_id : req.session.user,
-          user_school: result[0].SCHOOL,
-          auth : 'false'
+          user_school: req.session.school
         })
       }
-    })
   }
 });
 

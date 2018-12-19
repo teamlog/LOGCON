@@ -7,12 +7,16 @@ router.get('/:num',(req,res) => {
     db.query('select CONTENTS,TITLE,SCORE from Problems where id = ?',num,(err,result) => {
         if(err) throw err;
         if(!(req.session === undefined)){
-            res.render('challenge.ejs',{
-                info : result,
-                user_id : req.session.user,
-                user_school: req.session.school,
-                pid : pnum 
-            })
+            if(!(req.session.flag))
+                res.redirect('/auth');
+            else{
+                res.render('challenge.ejs',{
+                    info : result,
+                    user_id : req.session.user,
+                    user_school: req.session.school,
+                    pid : pnum 
+                })
+            }
         }
         else{
             res.redirect('/');
@@ -52,11 +56,15 @@ router.get('/',(req,res) => {
     db.query('select TITLE,SCORE from Problems',(err,result) => {
         if(err) throw err;
         if(!(req.session.user === undefined)){
-            res.render('challenges.ejs',{
-                info : result,
-                user_id : req.session.user,
-                user_school: req.session.school,
-            })
+            if(!(req.session.flag))
+                res.redirect('/auth');
+            else{
+                res.render('challenges.ejs',{
+                    info : result,
+                    user_id : req.session.user,
+                    user_school: req.session.school,
+                })
+            }
         }
         else{
             res.redirect('/');

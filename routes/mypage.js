@@ -7,15 +7,19 @@ router.get('/',(req,res) => {
         res.redirect('/');
     }
     else{
-        db.query('select * from Users where ID = ?', req.session.user, (err,result) => {
-            if (err) throw err;
-            res.render('mypage.ejs',{
-                user_id : result[0].ID,
-                user_school : result[0].SCHOOL,
-                score : result[0].SCORE,
-                comment : result[0].PROFILE_COMMENT
+        if(!(req.session.flag))
+            res.redirect('/auth');
+        else{
+            db.query('select * from Users where ID = ?', req.session.user, (err,result) => {
+                if (err) throw err;
+                res.render('mypage.ejs',{
+                    user_id : result[0].ID,
+                    user_school : result[0].SCHOOL,
+                    score : result[0].SCORE,
+                    comment : result[0].PROFILE_COMMENT
+                })
             })
-        })
+        }
     }
 })
 

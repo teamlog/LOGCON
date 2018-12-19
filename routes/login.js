@@ -28,7 +28,9 @@ router.get('/',(req,res) => {
       	    if (pw === result[0].PW){; 
                 req.session.user = id;
                 req.session.school = result[0].SCHOOL;
-                console.log(req.session.user,req.session.school,pw);
+                req.session.flag = result[0].FLAG;
+                req.session.score = result[0].SCORE;
+                //console.log(req.session.user,req.session.school,pw);
                 req.session.save(() => {
                     res.json({success : true});
 			    })
