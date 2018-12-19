@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/:num',(req,res) => {
     pnum = req.params.num;
-    db.query('select CONTENTS,TITLE,SCORE from Problems where id = ?',num,(err,result) => {
+    db.query('select CONTENTS,TITLE,SCORE from Problems where id = ?',pnum,(err,result) => {
         if(err) throw err;
         if(!(req.session === undefined)){
             if(!(req.session.flag))
