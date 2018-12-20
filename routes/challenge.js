@@ -28,7 +28,7 @@ router.post('/:num',(req,res) => {
     const pid = req.params.num;
     const user = req.session.user;
     const ans = req.body.answer;
-    console.log(pid);
+    console.log(ans);
     function solveCheck(problemid, userid){
         db.query('select * from Solved where PID = ? and USER = ?',[problemid,userid],(err,result) => {
             if(err) throw err;
