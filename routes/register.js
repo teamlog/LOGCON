@@ -27,17 +27,13 @@ router.get('/',(req,res) => {
     const tmpPwd = crypto.createHash('sha512').update(pw).digest('base64');
     function emailCheck(email){
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        // 검증에 사용할 정규식 변수 regExp에 저장
-        if (email.match(regExp) != null) {
+        if (email.match(regExp) != null) 
             return 1;
-        }
-        else {
+        else 
             return 0;
-        }
     }
-    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === ''){
+    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === '')
         res.json({message: "입력되지 않은 값이 있습니다."});
-    }
     if(!((emailCheck(tmpEmail))))
         res.json({success:false});   
     else{

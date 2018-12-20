@@ -32,14 +32,16 @@ router.post('/insertP',(req,res) => {
     const answer = req.body.answer;
     const score = req.body.score;
     const file = req.body.file;
-    db.query('insert into Problems (TITLE,CONTENTS,ANSWER,SCORE,FILE) values(?,?,?,?,?)',[title,content,answer,score,file]);  
+    db.query('insert into Problems (TITLE,CONTENTS,ANSWER,SCORE,FILE) values(?,?,?,?,?)',[title,content,answer,score,file]);
+    res.send('<script type="text/javascript">alert("추가완료!♪(๑ᴖ◡ᴖ๑)♪");window.location.reload();</script>');
 })
 
 router.post('/upNotice',(req,res) => {
     const title = req.body.title;
     const content = req.body.content;
     const time = moment().format('MMMM Do YYYY, h:mm:ss a');
-    db.query('insert into Notice (TITLE,CONTENTS,TIME) values(?,?,?)',[title,content,time]);  
+    db.query('insert into Notice (TITLE,CONTENTS,TIME) values(?,?,?)',[title,content,time]);
+    res.send('<script type="text/javascript">alert("추가완료!♪(๑ᴖ◡ᴖ๑)♪");window.location.href="/admin";</script>');
 })
 
 module.exports = router;
