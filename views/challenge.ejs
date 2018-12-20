@@ -18,14 +18,15 @@
     <script>
         // let pid = <%= pid %>;
         let dividedPid = window.location.pathname.split('/');
-        let urlPid = dividedPid[1];
+        urlPit = dividedPid[1];
     </script>
     
 </head>
 <body>
     <div class="overlay"></div>
     <div class="terminal">
-        <h1><span class="errorcode"><%= info[urlPid - 1].TITLE %></span> - <%= info[urlPid - 1].SCORE %></h1>
+        <!-- <h1><span class="errorcode"><%= info[pid - 1].TITLE %></span> - <%= info[pid - 1].SCORE %></h1> -->
+        <h1><span class="errorcode"></span> - <%= info[pid - 1].SCORE %></h1>
 
         <p>You can enter the commands listed below.</p>
         <p class="output">solve --answer=[answer key]</p>
@@ -36,11 +37,11 @@
 
         <br>
         <p>
-            <%= info[urlPid - 1].CONTENTS %>
+            <%= info[pid - 1].CONTENTS %>
         </p>
 
-        <% if (info[urlPid - 1].FILE_PATH != "false") { %>
-            <a href="<%= info[urlPid - 1].FILE_PATH %>" download="<%= info[urlPid - 1].TITLE %>">Download link</a>
+        <% if (info[pid - 1].FILE_PATH != "false") { %>
+            <a href="<%= info[pit - 1].FILE_PATH %>" download="<%= info[pit - 1].TITLE %>">Download link</a>
             <br>
         <% } %>
         <br>
@@ -50,7 +51,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[urlPid - 1].TITLE %>$ </span>
+                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[pit - 1].TITLE %>$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
