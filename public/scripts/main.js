@@ -176,7 +176,11 @@ function commandInspection(text) {
                 return response.json();
             })
             .then(function (myJSON) {
-
+                if (myJSON.success) {
+                    history.innerHTML += ("<br>" + "Go back to home page");
+                } else {
+                    history.innerHTML += ("<br>" + "Authentication failed. Please re-enter");
+                }
             })
         } else {
             history.innerHTML += ("<br>" + "The auth statement is strange.");
