@@ -1,5 +1,4 @@
 const express = require('express');
-const db = require('../db/connection');
 const router = express.Router();
 
 /* GET home page. */
