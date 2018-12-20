@@ -255,5 +255,8 @@ function commandInspection(text) {
         history.innerHTML += ("<br>" + "The solve statement is strange.");
     }
     
+
+    document.querySelector(".errorcode").innerHTML = urlPit;
     
 }
+let urlPit;
