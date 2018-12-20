@@ -259,4 +259,4 @@ function commandInspection(text) {
     document.querySelector(".errorcode").innerHTML = urlPit;
     
 }
-let urlPit;
+let urlPid;
