@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../db/connection');
+const crypto = require('crypto');
 const router = express.Router();
 
 router.get('/',(req,res) => {
@@ -18,7 +19,8 @@ router.get('/',(req,res) => {
 })
 .post('/',(req,res)=>{
     const id = req.body.id;
-    const pw = req.body.pw;
+    var tmpPw = req.body.pw;
+    const pw = crypto.createHash('sha512').update(tmpPw).digest('base64');
     db.query('select *from Users where ID = ?', id, (err, result) => {
 		if (err) throw err;
         if(result.length === 0){

@@ -2,6 +2,7 @@ const express = require('express');
 const randomstring = require('randomstring');
 const nodemailer = require('nodemailer');
 const db = require('../db/connection');
+const crypto = require('crypto');
 const router = express.Router();
 
 router.get('/',(req,res) => {
@@ -20,9 +21,10 @@ router.get('/',(req,res) => {
 })
 .post('/',(req,res) => {
     const tmpId = req.body.id;
-    const tmpPwd = req.body.pw;
+    const pw = req.body.pw;
     const tmpEmail = req.body.email;
     const tmpSchool = req.body.school;
+    const tmpPwd = crypto.createHash('sha512').update(pw).digest('base64');
     function emailCheck(){
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         // 검증에 사용할 정규식 변수 regExp에 저장

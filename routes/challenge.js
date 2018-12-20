@@ -3,30 +3,30 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/:num',(req,res) => {
-    pnum = req.params.num;
-    db.query('select CONTENTS,TITLE,SCORE from Problems where id = ?',pnum,(err,result) => {
-        if(err) throw err;
-        if(!(req.session === undefined)){
-            if(!(req.session.flag))
-                res.redirect('/auth');
-            else{
+    if(!(req.session === undefined)){
+        if(!(req.session.flag))
+            res.redirect('/auth');
+        else{
+            pnum = req.params.num;
+            db.query('select CONTENTS,TITLE,SCORE from Problems where id = ?',pnum,(err,result) => {
+                if(err) throw err;
                 res.render('challenge.ejs',{
                     info : result,
                     user_id : req.session.user,
                     user_school: req.session.school,
                     pid : pnum 
-                })
-            }
+                 })
+            })
         }
-        else{
-            res.redirect('/');
-        }
-    })
+    }
+    else
+        res.redirect('/');
 })
 router.post('/:num',(req,res) => {
     const pid = req.param.num;
     const user = req.session.user;
     const ans = req.body.answer;
+    console.log('1');
     function solveCheck(pid, user){
         db.query('select * from Solved where PID = ? and USER = ?',[pid,user],(err,result) => {
             if(err) throw err;

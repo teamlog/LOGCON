@@ -4,14 +4,16 @@ const router = express.Router();
 router.get('/',(req,res) => {
     if(!(req.session.user)){
         res.render('help.ejs',{
-            id : 'guest',
-            school : 'undefined'
+            user_id : 'guest',
+            user_school : 'undefined'
         })
     }
     else{
         res.render('help.ejs',{
-            id : req.session.user,
-            school : req.session.school
+            user_id : req.session.user,
+            user_school : req.session.school
         })
     }
 })
+
+module.exports = router;

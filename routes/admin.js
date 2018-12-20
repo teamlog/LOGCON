@@ -31,7 +31,8 @@ router.post('/insertP',(req,res) => {
     const content = req.body.content;
     const answer = req.body.answer;
     const score = req.body.score;
-    db.query('insert into Problems (TITLE,CONTENTS,ANSWER,SCORE) values(?,?,?,?)',[title,content,answer,score]);  
+    const file = req.body.file;
+    db.query('insert into Problems (TITLE,CONTENTS,ANSWER,SCORE,FILE) values(?,?,?,?,?)',[title,content,answer,score,file]);  
 })
 
 router.post('/upNotice',(req,res) => {

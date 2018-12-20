@@ -16,6 +16,7 @@ const registerRouter = require('./routes/register');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const logoutRouter = require('./routes/logout');
+const helpRouter = require('./routes/help');
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,6 +38,7 @@ app.use('/auth',authRouter);
 app.use('/admin',adminRouter);
 app.use('/register',registerRouter);
 app.use('/logout',logoutRouter);
+app.use('/help',helpRouter);
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 
