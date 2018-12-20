@@ -3,12 +3,13 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/:num',(req,res) => {
+    console.log(req.params.num)
     if(!(req.session === undefined)){
         if(!(req.session.flag))
             res.redirect('/auth');
         else{
             pnum = req.params.num;
-            db.query('select CONTENTS,TITLE,SCORE,FILE_PATH from Problems where id = ?',pnum,(err,result) => {
+            db.query('select CONTENTS,TITLE,SCORE,FILE_PATH from Problems where ID = ?',pnum,(err,result) => {
                 if(err) throw err;
                 res.render('challenge.ejs',{
                     info : result,
@@ -23,23 +24,24 @@ router.get('/:num',(req,res) => {
         res.redirect('/');
 })
 router.post('/:num',(req,res) => {
-    const pid = req.param.num;
+    console.log(req.params.num);
+    const pid = req.params.num;
     const user = req.session.user;
     const ans = req.body.answer;
-    console.log(req.body);
-    function solveCheck(pid, user){
-        db.query('select * from Solved where PID = ? and USER = ?',[pid,user],(err,result) => {
+    console.log(pid);
+    function solveCheck(problemid, userid){
+        db.query('select * from Solved where PID = ? and USER = ?',[problemid,userid],(err,result) => {
             if(err) throw err;
-            if(result.length)
+            if(!(result.length === 0))
                 return 0;
             else
                 return 1;
         })
     }
-    db.query('select ANSWER,SCORE from Problems where PID = ?',(err,result) => {
+    db.query('select ANSWER,SCORE from Problems where ID = ?',pid,(err,result) => {
         if(err) throw err;
-        if(result === ans){
-            if(solveCheck(pid,user)){
+        if(result[0].ANSWER === ans){
+            if((solveCheck(pid,user) === 1)){
                 db.query('update Users set SCORE = SCORE + ? where ID = ?',[result[0].SCORE,user]);
                 res.json({solve : "정답!!!٩(๑❛ワ❛๑)و"});
             }
