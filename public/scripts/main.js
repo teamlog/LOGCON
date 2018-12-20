@@ -187,8 +187,8 @@ function commandInspection(text) {
     // sovle -a=이것은답이다
     } else if (text.match(solve) != null) {
         let dividedSolve = text.split(" ");
-        let id, answer = null;
-        if ((dividedSolve[1].match(/^--answer\=|^-a\=/)) && (dividedSolve.length == 2)) {
+        // let id, answer = null;
+        if ((dividedSolve[1].match(/^\-\-answer\=|^\-a\=/)) && (dividedSolve.length == 2)) {
 
             // id 검사
             // if (dividedSolve[1].match(/^--id\=/) != null) {
@@ -200,9 +200,9 @@ function commandInspection(text) {
             // }
 
             // answer 검사
-            if (dividedSolve[1].match(/^--answer\=/) != null) {
+            if (dividedSolve[1].match(/^\-\-answer\=/) != null) {
                 answer = dividedSolve[1].substring(9);
-            } else if (dividedSolve[1].match(/^-a\=/) != null) {
+            } else if (dividedSolve[1].match(/^\-a\=/) != null) {
                 answer = dividedSolve[1].substring(3);
             } else {
                 history.innerHTML += ("<br>" + "answer syntax is strange.");
