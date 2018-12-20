@@ -25,10 +25,10 @@ router.get('/',(req,res) => {
     const tmpEmail = req.body.email;
     const tmpSchool = req.body.school;
     const tmpPwd = crypto.createHash('sha512').update(pw).digest('base64');
-    function emailCheck(){
+    function emailCheck(email){
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         // 검증에 사용할 정규식 변수 regExp에 저장
-        if (tmpEmail.match(regExp) != null) {
+        if (email.match(regExp) != null) {
             return 1;
         }
         else {
@@ -37,8 +37,10 @@ router.get('/',(req,res) => {
     }
     if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === ''){
         res.json({message: "입력되지 않은 값이 있습니다."});
-    }    
-    if(emailCheck){
+    }
+    if(!((emailCheck(tmpEmail))))
+        res.json({success:false});   
+    else{
         db.query('select SCORE from Users where ID = ?', tmpId, (err, result) => {
 			if(err) console.error(err);
 			if(!(result.length===0))
@@ -69,7 +71,7 @@ router.get('/',(req,res) => {
                                 console.log(err);
                             else{
                                 console.log('sibal',response);
-                                res.json({success: false});
+                                res.json({success: true});
                             }   
                         })    
                     }
