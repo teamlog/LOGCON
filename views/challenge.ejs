@@ -18,7 +18,7 @@
     <script>
         // let pid = <%= pid %>;
         let dividedPid = window.location.pathname.split('/');
-        urlPit = dividedPid[1];
+        urlPid = dividedPid[1];
     </script>
     
 </head>
@@ -41,7 +41,7 @@
         </p>
 
         <% if (info[pid - 1].FILE_PATH != "false") { %>
-            <a href="<%= info[pit - 1].FILE_PATH %>" download="<%= info[pit - 1].TITLE %>">Download link</a>
+            <a href="<%= info[pid - 1].FILE_PATH %>" download="<%= info[pid - 1].TITLE %>">Download link</a>
             <br>
         <% } %>
         <br>
@@ -51,7 +51,7 @@
         
         <form action="javascript:void(0);">
             <p class="input-cover">
-                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[pit - 1].TITLE %>$ </span>
+                <span id="user-information"><%= user_id %>@<%= user_school %>:/challenges/<%= info[pid - 1].TITLE %>$ </span>
                 <input class="input" type="text" autocomplete="off autofocus">
             </p>
         </form>
