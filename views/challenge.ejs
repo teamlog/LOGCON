@@ -17,16 +17,15 @@
 
     <script>
         // let pid = <%= pid %>;
-        let dividedPid = window.location.pathname.split('/');
-        urlPid = dividedPid[1];
+        // let dividedPid = window.location.pathname.split('/');
+        // urlPid = dividedPid[1];
     </script>
     
 </head>
 <body>
     <div class="overlay"></div>
     <div class="terminal">
-        <!-- <h1><span class="errorcode"><%= info[pid - 1].TITLE %></span> - <%= info[pid - 1].SCORE %></h1> -->
-        <h1><span class="errorcode"></span> - <%= info[pid - 1].SCORE %></h1>
+        <h1><span class="errorcode"><%= info[pid - 1].TITLE %></span> - <%= info[pid - 1].SCORE %></h1>
 
         <p>You can enter the commands listed below.</p>
         <p class="output">solve --answer=[answer key]</p>
