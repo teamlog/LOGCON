@@ -33,8 +33,8 @@
             <%= info[pid - 1].CONTENTS %>
         </p>
 
-        <% if (info[pid - 1].FILE != fales) { %>
-            <a href="<%= info[pid - 1].FILE %>" download="<%= info[pid - 1].TITLE %>">Download link</a>
+        <% if (info[pid - 1].FILE_PATH != 'false') { %>
+            <a href="<%= info[pid - 1].FILE_PATH %>" download="<%= info[pid - 1].TITLE %>">Download link</a>
             <br>
         <% } %>
         <br>

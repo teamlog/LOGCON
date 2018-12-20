@@ -8,7 +8,7 @@ router.get('/:num',(req,res) => {
             res.redirect('/auth');
         else{
             pnum = req.params.num;
-            db.query('select CONTENTS,TITLE,SCORE,FILE from Problems where id = ?',pnum,(err,result) => {
+            db.query('select CONTENTS,TITLE,SCORE,FILE_PATH from Problems where id = ?',pnum,(err,result) => {
                 if(err) throw err;
                 res.render('challenge.ejs',{
                     info : result,
@@ -26,6 +26,7 @@ router.post('/:num',(req,res) => {
     const pid = req.param.num;
     const user = req.session.user;
     const ans = req.body.answer;
+    console.log(req.body);
     function solveCheck(pid, user){
         db.query('select * from Solved where PID = ? and USER = ?',[pid,user],(err,result) => {
             if(err) throw err;

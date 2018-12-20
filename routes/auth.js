@@ -23,11 +23,11 @@ router.get('/', (req,res) => {
             db.query('update Users set FLAG=1 where ID = ?',req.session.user);
             req.session.flag = 1;
             req.session.save(() => {
-                res.redirect('/');
+                res.json({success : true});
             })
         }
         else
-            res.send('<script type="text/javascript">alert("인증키가 달라요(╥﹏╥)");window.location.reload();</script>');
+            res.json({success:false});
     })
 }) 
 
