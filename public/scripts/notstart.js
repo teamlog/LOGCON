@@ -35,8 +35,6 @@ let echo = /^echo\s/;
 let login = /^login\s/;
 let register = /^register\s/;
 let auth = /^auth\s/;
-let solve = /^solve\s/; // answer
-let comment = /^comment\s/;
 function commandInspection(text) {
     // cd
     if (text.match(cd) != null) {
@@ -82,9 +80,6 @@ function commandInspection(text) {
     // ls
     } else if (text.match(ls) != null) {
         history.innerHTML += ("<br>" + "home" + 
-                                "<br>" + "challenges" + 
-                                "<br>" + "notice" + 
-                                "<br>" + "rank" + 
                                 "<br>" + "login" +
                                 "<br>" + "register");
 
@@ -186,70 +181,6 @@ function commandInspection(text) {
             history.innerHTML += ("<br>" + "The auth statement is strange.");
         }
 
-    // solve (answer)
-    // solve --answer=이것은답이다
-    // sovle -a=이것은답이다
-    } else if (text.match(solve) != null) {
-        let dividedSolve = text.split(" ");
-        // let id, answer = null;
-        if ((dividedSolve[1].match(/^\-\-answer\=|^\-a\=/)) && (dividedSolve.length == 2)) {
-
-            // id 검사
-            // if (dividedSolve[1].match(/^--id\=/) != null) {
-            //     id = dividedSolve[1].substring(5);
-            // } else if (dividedSolve[1].match(/^-i\=/) != null) {
-            //     id = dividedSolve[1].substring(3);
-            // } else {
-            //     history.innerHTML += ("<br>" + "id syntax is strange.");
-            // }
-
-            // answer 검사
-            if (dividedSolve[1].match(/^\-\-answer\=/) != null) {
-                answer = dividedSolve[1].substring(9);
-            } else if (dividedSolve[1].match(/^\-a\=/) != null) {
-                answer = dividedSolve[1].substring(3);
-            } else {
-                history.innerHTML += ("<br>" + "answer syntax is strange.");
-            }
-
-            // 답 전달
-            fetch("http://localhost:4000/challenge/" + pid - 1, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "answer": answer
-                })
-            })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJSON) {
-                history.innerHTML += ("<br>" + myJSON.solve);
-            })
-        }
-
-    // comment
-    } else if (text.match(comment) != null) {
-        let commentText = text.substring(8);
-
-        // 코멘트 전달
-        fetch("http://localhost:4000/mypage", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "ment": commentText
-            })
-        })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (myJSON) {
-
-        })
 
     } else {
         history.innerHTML += ("<br>" + "The solve statement is strange.");
