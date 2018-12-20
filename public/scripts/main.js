@@ -213,7 +213,7 @@ function commandInspection(text) {
             }
 
             // 답 전달
-            fetch("http://localhost:4000/challenge/" +pid, {
+            fetch("http://localhost:4000/challenge/" + pid, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
