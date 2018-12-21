@@ -85,6 +85,7 @@ function commandInspection(text) {
                                 "<br>" + "challenges" + 
                                 "<br>" + "notice" + 
                                 "<br>" + "rank" + 
+                                "<br>" + "mypage" +
                                 "<br>" + "login" +
                                 "<br>" + "register");
 
