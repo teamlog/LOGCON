@@ -17,6 +17,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const logoutRouter = require('./routes/logout');
 const helpRouter = require('./routes/help');
+const imsiRouter = require('./routes/notStart')
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,6 +29,8 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
+app.use('/imsi',imsiRouter);
 app.use('/', indexRouter);
 app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
