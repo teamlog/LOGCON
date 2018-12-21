@@ -30,18 +30,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.use('/imsi',imsiRouter);
-app.use('/', indexRouter);
-app.use('/rank',rankRouter);
+app.use('/',imsiRouter);
+//app.use('/', indexRouter);
+//app.use('/rank',rankRouter);
 app.use('/mypage',myPageRouter);
-app.use('/notice', noticeRouter);
+//app.use('/notice', noticeRouter);
 app.use('/login',loginRouter);
-app.use('/challenge',challengeRouter);
+//app.use('/challenge',challengeRouter);
 app.use('/auth',authRouter);
 app.use('/admin',adminRouter);
 app.use('/register',registerRouter);
 app.use('/logout',logoutRouter);
-app.use('/help',helpRouter);
+//app.use('/help',helpRouter);
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 

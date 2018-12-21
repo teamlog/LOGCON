@@ -28,7 +28,7 @@ router.post('/',(req,res) => {
     const ment = req.body.ment;
     const user = req.session.user;
     db.query('update Users set PROFILE_COMMENT=? where ID = ?',[ment,user]);
-    res.send('<script type="text/javascript">alert("수정완료!ヽ(๑╹◡╹๑)ノ");window.location.reload();</script>');
+    res.json({message: "수정완료!ヽ(๑╹◡╹๑)ノ"});
 })
 
 module.exports = router;
