@@ -3,7 +3,6 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/:num',(req,res) => {
-    console.log(req.params.num)
     if(!(req.session === undefined)){
         if(!(req.session.flag))
             res.redirect('/auth');
@@ -24,7 +23,7 @@ router.get('/:num',(req,res) => {
         res.redirect('/');
 })
 router.post('/:num',(req,res) => {
-    console.log(req.params.num);
+    console.log(req);
     const pid = req.params.num;
     const user = req.session.user;
     const ans = req.body.answer;
@@ -38,11 +37,13 @@ router.post('/:num',(req,res) => {
                 return 1;
         })
     }
+    
     db.query('select ANSWER,SCORE from Problems where ID = ?',pid,(err,result) => {
         if(err) throw err;
         if(result[0].ANSWER === ans){
             if((solveCheck(pid,user) === 1)){
-                db.query('update Users set SCORE = SCORE + ? where ID = ?',[result[0].SCORE,user]);
+                db.query('update Users set SCORE + ? where ID = ?',[result[0].SCORE,user]);
+                db.query('insert into Solved (PID,USER) values (?,?)',[pid,user]);
                 res.json({solve : "정답!!!٩(๑❛ワ❛๑)و"});
             }
             else
