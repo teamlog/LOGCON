@@ -132,29 +132,33 @@ function commandInspection(text) {
         let dividedRegister = text.split(" ");
         if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && dividedRegister.length == 8) {
 
-            fetch("http://localhost:4000/register", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "id": dividedRegister[1],
-                    "pw": dividedRegister[3],
-                    "email": dividedRegister[5],
-                    "school": dividedRegister[7]
+            if (!(dividedRegister[3].length < 8 || dividedRegister[3].length > 20)) {
+                fetch("http://localhost:4000/register", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        "id": dividedRegister[1],
+                        "pw": dividedRegister[3],
+                        "email": dividedRegister[5],
+                        "school": dividedRegister[7]
+                    })
                 })
-            })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJSON) {
-                if (myJSON.success) {
-                    history.innerHTML += ("<br>" + "Register success!");
-                    history.innerHTML += ("<br>" + "If you go to any page, you will be taken to the email verification page. The verification code will be emailed in about 5 seconds.");
-                } else {
-                    history.innerHTML += ("<br>" + "Register fail!");
-                }
-            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJSON) {
+                    if (myJSON.success) {
+                        history.innerHTML += ("<br>" + "Register success!");
+                        history.innerHTML += ("<br>" + "If you go to any page, you will be taken to the email verification page. The verification code will be emailed in about 5 seconds.");
+                    } else {
+                        history.innerHTML += ("<br>" + "Register fail!");
+                    }
+                })
+            } else {
+                history.innerHTML += ("<br>" + "Register fail! Set the password to 8 or more and less than 20 characters.");
+            }
 
         } else {
             history.innerHTML += ("<br>" + "The register statement is strange.");
