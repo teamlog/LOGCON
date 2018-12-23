@@ -34,7 +34,7 @@ router.get('/',(req,res) => {
     }
     if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === '')
         res.json({success: false});
-    if(tmpPwd.length<8||tmpPwd.length>20)
+    if(pw.length<8||pw.length>20||tmpId.length>20||tmpId.length<5)
         res.json({success:false})
     if(!((emailCheck(tmpEmail))))
         res.json({success:false});   
