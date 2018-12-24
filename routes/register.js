@@ -33,21 +33,21 @@ router.get('/',(req,res) => {
         else 
             return 0;
     }
-    function gradeCheck(grade){
-        if(grade === 'm')
-            grade = "중학생";
-        if(grade === 'h')
-            grade = "고등학생";
-        else
-            res.json({success : false});
+    if(tmpGrade != 'h' && tmpGrade != 'm'){
+        res.json({success : false});
     }
-    gradeCheck(tmpGrade);
+    if(tmpGrade === 'h'){
+        tmpGrade = "고등학생";
+    }
+    if(tmpGrade === 'm'){
+        tmpGrade = "중학생";
+    }
     if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === ''||tmpGrade === '')
         res.json({success: false});
     if(pw.length<8||pw.length>20||tmpId.length>20||tmpId.length<5)
         res.json({success:false})
     if(!((emailCheck(tmpEmail))))
-        res.json({success:false});   
+        res.json({success:false});
     else{
         db.query('select SCORE from Users where ID = ?', tmpId, (err, result) => {
 			if(err) console.error(err);
@@ -61,6 +61,7 @@ router.get('/',(req,res) => {
                     else{
                         const authkey = randomstring.generate();
                         db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY,GRADE) values (?,?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey,tmpGrade]);
+                        res.json({success: true});
                         const transporter = nodemailer.createTransport({
                             service: 'Gmail',
                             auth: {
@@ -79,7 +80,6 @@ router.get('/',(req,res) => {
                                 console.log(err);
                             else{
                                 console.log('sibal',response);
-                                res.json({success: true});
                             }   
                         })    
                     }
