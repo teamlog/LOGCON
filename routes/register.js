@@ -24,7 +24,7 @@ router.get('/',(req,res) => {
     const pw = req.body.pw;
     const tmpEmail = req.body.email;
     const tmpSchool = req.body.school;
-    const tmpGrade = req.body.grade;
+    var tmpGrade = req.body.grade;
     const tmpPwd = crypto.createHash('sha512').update(pw).digest('base64');
     function emailCheck(email){
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -33,7 +33,16 @@ router.get('/',(req,res) => {
         else 
             return 0;
     }
-    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === '')
+    function gradeCheck(grade){
+        if(tmpGrade === 'm')
+            tmpGrade = "중학생";
+        if(tmpGrade === 'h')
+            tmpGrade = "고등학생";
+        else
+            res.json({success : false});
+    }
+    gradeCheck(tmpGrade);
+    if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === ''||tmpGrade === '')
         res.json({success: false});
     if(pw.length<8||pw.length>20||tmpId.length>20||tmpId.length<5)
         res.json({success:false})
