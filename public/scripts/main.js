@@ -130,7 +130,7 @@ function commandInspection(text) {
     // register asdf -p 1234 --email slimejam01@gmail.com --school 선린인터넷고등학교
     } else if (text.match(register) != null) {
         let dividedRegister = text.split(" ");
-        if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && dividedRegister.length == 8) {
+        if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && ((dividedRegister[8] == "-m") || (dividedRegister[8] == "-h")) && dividedRegister.length == 9) {
 
             if (!(dividedRegister[3].length < 8 || dividedRegister[3].length > 20)) {
                 fetch("http://localhost:4000/register", {
@@ -142,7 +142,8 @@ function commandInspection(text) {
                         "id": dividedRegister[1],
                         "pw": dividedRegister[3],
                         "email": dividedRegister[5],
-                        "school": dividedRegister[7]
+                        "school": dividedRegister[7],
+                        "grade" : dividedRegister[8].substring(1)
                     })
                 })
                 .then(function (response) {
