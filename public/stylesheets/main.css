@@ -126,3 +126,7 @@ a::after {
 .display-none {
     display: none;
 }
+
+.text-white {
+    color: white;
+}
