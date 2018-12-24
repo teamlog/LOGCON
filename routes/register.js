@@ -24,6 +24,7 @@ router.get('/',(req,res) => {
     const pw = req.body.pw;
     const tmpEmail = req.body.email;
     const tmpSchool = req.body.school;
+    const tmpGrade = req.body.grade;
     const tmpPwd = crypto.createHash('sha512').update(pw).digest('base64');
     function emailCheck(email){
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -50,7 +51,7 @@ router.get('/',(req,res) => {
                         res.json({success: false});
                     else{
                         const authkey = randomstring.generate();
-                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey]);
+                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey,tmpGrade]);
                         const transporter = nodemailer.createTransport({
                             service: 'Gmail',
                             auth: {
