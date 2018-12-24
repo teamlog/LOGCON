@@ -115,7 +115,7 @@ function commandInspection(text) {
         let dividedRegister = text.split(" ");
         if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && ((dividedRegister[8] == "-m") || (dividedRegister[8] == "-h")) && dividedRegister.length == 9) {
 
-            if (!(dividedRegister[3].length < 8 || dividedRegister[3].length > 20)) {
+            if (!(dividedRegister[3].length < 8 || dividedRegister[3].length > 20) && !(dividedRegister[1].length < 5 || dividedRegister[1].length > 20)) {
                 fetch("http://localhost:4000/register", {
                     method: "post",
                     headers: {
@@ -141,7 +141,7 @@ function commandInspection(text) {
                     }
                 })
             } else {
-                history.innerHTML += ("<br>" + "Register fail! Set the password to 8 or more and less than 20 characters.");
+                history.innerHTML += ("<br>" + "Register fail! Your username or password is too short or long!");
             }
 
         } else {
