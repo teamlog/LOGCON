@@ -41,7 +41,7 @@ app.use('/auth',authRouter);
 app.use('/admin',adminRouter);
 app.use('/register',registerRouter);
 app.use('/logout',logoutRouter);
-//app.use('/help',helpRouter);
+app.use('/help',helpRouter);
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 
