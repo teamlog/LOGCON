@@ -81,7 +81,8 @@ function commandInspection(text) {
 
     // ls
     } else if (text.match(ls) != null) {
-        history.innerHTML += ("<br>" + "home" + 
+        history.innerHTML += ("<br>" + "help" +  
+                                "<br>" + "home" + 
                                 "<br>" + "challenges" + 
                                 "<br>" + "notice" + 
                                 "<br>" + "rank" + 
