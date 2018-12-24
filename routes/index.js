@@ -7,15 +7,12 @@ router.get('/', (req, res) => {
     res.render('index.ejs',{
       score : '0',
       user_id : 'guest',
-      user_school: 'undefined',
-      auth : 'true'
+      user_school: 'undefined'
     });
   }
   else{
-    if(!(req.session.flag)){
+    if(!(req.session.flag))
         res.redirect('/auth');
-        console.log(req.session.flag);
-    }
     else{
         res.render('index.ejs',{
           score : req.session.score,
