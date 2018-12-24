@@ -33,7 +33,9 @@ router.get('/',(req,res) => {
             return 0;
     }
     if(tmpId===''||tmpPwd===''||tmpEmail===''||tmpSchool === '')
-        res.json({message: "입력되지 않은 값이 있습니다."});
+        res.json({success: false});
+    if(pw.length<8||pw.length>20||tmpId.length>20||tmpId.length<5)
+        res.json({success:false})
     if(!((emailCheck(tmpEmail))))
         res.json({success:false});   
     else{
