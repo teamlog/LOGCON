@@ -60,7 +60,7 @@ router.get('/',(req,res) => {
                         res.json({success: false});
                     else{
                         const authkey = randomstring.generate();
-                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey,tmpGrade]);
+                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY,GRADE) values (?,?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey,tmpGrade]);
                         const transporter = nodemailer.createTransport({
                             service: 'Gmail',
                             auth: {
