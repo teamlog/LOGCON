@@ -34,10 +34,10 @@ router.get('/',(req,res) => {
             return 0;
     }
     function gradeCheck(grade){
-        if(tmpGrade === 'm')
-            tmpGrade = "중학생";
-        if(tmpGrade === 'h')
-            tmpGrade = "고등학생";
+        if(grade === 'm')
+            grade = "중학생";
+        if(grade === 'h')
+            grade = "고등학생";
         else
             res.json({success : false});
     }
@@ -60,7 +60,7 @@ router.get('/',(req,res) => {
                         res.json({success: false});
                     else{
                         const authkey = randomstring.generate();
-                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY) values (?,?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey,tmpGrade]);
+                        db.query('insert into Users (ID,PW,EMAIL,SCHOOL,AUTHKEY,GRADE) values (?,?,?,?,?,?)',[tmpId,tmpPwd,tmpEmail,tmpSchool,authkey,tmpGrade]);
                         const transporter = nodemailer.createTransport({
                             service: 'Gmail',
                             auth: {
