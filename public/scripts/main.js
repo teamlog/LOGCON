@@ -68,6 +68,7 @@ function commandInspection(text) {
     // ls
     } else if (text.match(ls) != null) {
         history.innerHTML += ("<br>" + "home" + 
+                                "<br>" + "help" +
                                 "<br>" + "mypage" +
                                 "<br>" + "login" +
                                 "<br>" + "register");
