@@ -1,3 +1,5 @@
+import { defaultCoreCipherList } from "constants";
+
 let history;
 
 onload = function () {
@@ -36,6 +38,7 @@ let login = /^login\s/;
 let register = /^register\s/;
 let auth = /^auth\s/;
 let comment = /^comment\s/;
+let reverify = /^reverify\s/;
 function commandInspection(text) {
     // cd
     if (text.match(cd) != null) {
@@ -173,10 +176,15 @@ function commandInspection(text) {
                 return response.json();
             })
             .then(function (myJSON) {
-                if (myJSON.success) {
-                    history.innerHTML += ("<br>" + "Go back to home page");
-                } else {
-                    history.innerHTML += ("<br>" + "Authentication failed. Please re-enter");
+                switch (myJSON.success) {
+                    case true:
+                        history.innerHTML += ("<br>" + "Verification successful! Go back to home page");
+                        break;
+                    case "already":
+                        history.innerHTML += ("<br>" + "You are already email certified");
+                        break;
+                    default:
+                        history.innerHTML += ("<br>" + "Authentication failed. Please re-enter");
                 }
             })
         } else {
@@ -204,8 +212,36 @@ function commandInspection(text) {
             history.innerHTML += ("<br>" + myJSON.message);
         })
 
+    // reverify
+    } else if (text.match(reverify) != null) {
+        let dividedReverify = text.split(" ");
+        if (dividedReverify[1] == "--email" && dividedReverify.length == 3) {
+            fetch("http://con.teamlog.kr/auth", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "reverify": dividedReverify[2]
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+                if (myJSON.success) {
+                    history.innerHTML += ("<br>" + "Successful reset of email and resend authentication key.");
+                } else {
+                    history.innerHTML += ("<br>" + "Email reset failed.");
+                }
+                
+            })  
+        } else {
+            history.innerHTML += ("<br>" + "The reverify statement is strange.");
+        }
+
     } else {
-        history.innerHTML += ("<br>" + "The solve statement is strange.");
+        history.innerHTML += ("<br>" + "It is an unintelligible command.");
     }
     
     
