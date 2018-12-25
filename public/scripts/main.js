@@ -184,10 +184,15 @@ function commandInspection(text) {
                 return response.json();
             })
             .then(function (myJSON) {
-                if (myJSON.success) {
-                    history.innerHTML += ("<br>" + "Go back to home page");
-                } else {
-                    history.innerHTML += ("<br>" + "Authentication failed. Please re-enter");
+                switch (myJSON.success) {
+                    case true:
+                        history.innerHTML += ("<br>" + "Verification successful! Go back to home page");
+                        break;
+                    case "already":
+                        history.innerHTML += ("<br>" + "You are already email certified");
+                        break;
+                    default:
+                        history.innerHTML += ("<br>" + "Authentication failed. Please re-enter");
                 }
             })
         } else {
