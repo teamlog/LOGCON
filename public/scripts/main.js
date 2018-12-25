@@ -239,7 +239,7 @@ function commandInspection(text) {
     // exit
     } else if (text.match(exit) != null) {
         if (text == "exit") {
-            location.href = "/logout";
+            location.href = "logout";
         }
 
     } else {
