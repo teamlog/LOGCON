@@ -61,6 +61,9 @@ function commandInspection(text) {
             case "cd register":
                 location.href = "register";
                 break;
+            case "cd help":
+                location.href = "help";
+                break;
             default:
                 history.innerHTML += ("<br>" + "The specified path could not be found.");
         }
