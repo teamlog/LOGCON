@@ -1,4 +1,5 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 const db = require('../db/connection');
 const router = express.Router();
 
