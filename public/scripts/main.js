@@ -64,6 +64,9 @@ function commandInspection(text) {
             case "cd help":
                 location.href = "help";
                 break;
+            case "exit":
+                location.href = "logout";
+                break;
             default:
                 history.innerHTML += ("<br>" + "The specified path could not be found.");
         }
