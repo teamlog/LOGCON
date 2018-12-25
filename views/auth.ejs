@@ -22,6 +22,8 @@
         <h1>Welcome to <span class="errorcode">LOGCON</span> by Teamlog 2018</h1>
         <p>You need to be authenticated by email before you can login. You can register using the commands listed below.</p>
         <p class="output">auth [email authentication key]</p>
+        <p>If you have not received the email, please reset your email using the command below and get your authorization key again.</p>
+        <p class="output">reverify --email [email]</p>
 
         <br>
         <p id="history">
@@ -31,7 +33,7 @@
         <form action="javascript:void(0);">
             <p class="input-cover">
                 <span id="user-information"><%= id %>@<%= school %>:/auth$ </span>
-                <input class="input" type="text" autocomplete="off autofocus">
+                <input class="input" type="text" autocomplete="off" autofocus>
             </p>
         </form>
     </div>
