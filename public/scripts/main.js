@@ -292,6 +292,12 @@ function commandInspection(text) {
             history.innerHTML += ("<br>" + "The reverify statement is strange.");
         }
 
+    // exit
+    } else if (text.match(exit) != null) {
+        if (text == "exit") {
+            location.href = "/logout";
+        }
+
     } else {
         history.innerHTML += ("<br>" + "It is an unintelligible command.");
     }
