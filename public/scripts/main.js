@@ -83,7 +83,7 @@ function commandInspection(text) {
         let dividedLogin = text.split(" ");
         if (dividedLogin[2] == "-p" && dividedLogin.length == 4) {
 
-            path = fetch("http://localhost:4000/login", {
+            path = fetch("http://con.teamlog.kr/login", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function commandInspection(text) {
         if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && ((dividedRegister[8] == "-m") || (dividedRegister[8] == "-h")) && dividedRegister.length == 9) {
 
             if (!(dividedRegister[3].length < 8 || dividedRegister[3].length > 20) && !(dividedRegister[1].length < 5 || dividedRegister[1].length > 20)) {
-                fetch("http://localhost:4000/register", {
+                fetch("http://con.teamlog.kr/register", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -154,7 +154,7 @@ function commandInspection(text) {
         let dividedAuthKey = text.split(" ");
         if (dividedAuthKey.length == 2) {
 
-            path = fetch("http://localhost:4000/auth", {
+            path = fetch("http://con.teamlog.kr/auth", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -182,7 +182,7 @@ function commandInspection(text) {
         let commentText = text.substring(8);
 
         // 코멘트 전달
-        fetch("http://localhost:4000/mypage", {
+        fetch("http://con.teamlog.kr/mypage", {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
