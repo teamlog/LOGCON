@@ -1,5 +1,3 @@
-import { defaultCoreCipherList } from "constants";
-
 let history;
 
 onload = function () {
