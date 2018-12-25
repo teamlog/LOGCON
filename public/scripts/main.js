@@ -74,6 +74,9 @@ function commandInspection(text) {
             case "cd register":
                 location.href = "register";
                 break;
+            case "cd help":
+                location.href = "help";
+                break;
             default:
                 history.innerHTML += ("<br>" + "The specified path could not be found.");
                 // location.href = "404";
@@ -295,7 +298,7 @@ function commandInspection(text) {
     // exit
     } else if (text.match(exit) != null) {
         if (text == "exit") {
-            location.href = "/logout";
+            location.href = "logout";
         }
 
     } else {
