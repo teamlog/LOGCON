@@ -37,6 +37,7 @@ let register = /^register\s/;
 let auth = /^auth\s/;
 let comment = /^comment\s/;
 let reverify = /^reverify\s/;
+let exit = /^exit/;
 function commandInspection(text) {
     // cd
     if (text.match(cd) != null) {
@@ -64,9 +65,6 @@ function commandInspection(text) {
                 break;
             case "cd help":
                 location.href = "help";
-                break;
-            case "exit":
-                location.href = "logout";
                 break;
             default:
                 history.innerHTML += ("<br>" + "The specified path could not be found.");
@@ -236,6 +234,12 @@ function commandInspection(text) {
             })  
         } else {
             history.innerHTML += ("<br>" + "The reverify statement is strange.");
+        }
+
+    // exit
+    } else if (text.match(exit) != null) {
+        if (text == "exit") {
+            location.href = "/logout";
         }
 
     } else {
