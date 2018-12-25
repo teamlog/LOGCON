@@ -256,11 +256,39 @@ function commandInspection(text) {
             return response.json();
         })
         .then(function (myJSON) {
-
+            history.innerHTML += ("<br>" + myJSON.message);
         })
 
+    // reverify
+    } else if (text.match(reverify) != null) {
+        let dividedReverify = text.split(" ");
+        if (dividedReverify[1] == "--email" && dividedReverify.length == 3) {
+            fetch("http://con.teamlog.kr/auth", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "reverify": dividedReverify[2]
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJSON) {
+                if (myJSON.success) {
+                    history.innerHTML += ("<br>" + "Successful reset of email and resend authentication key.");
+                } else {
+                    history.innerHTML += ("<br>" + "Email reset failed.");
+                }
+                
+            })  
+        } else {
+            history.innerHTML += ("<br>" + "The reverify statement is strange.");
+        }
+
     } else {
-        history.innerHTML += ("<br>" + "The solve statement is strange.");
+        history.innerHTML += ("<br>" + "It is an unintelligible command.");
     }
     
 }
