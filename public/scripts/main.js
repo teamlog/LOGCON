@@ -1,4 +1,5 @@
 let history;
+let currentURL = location.protocol + "//" + location.host;
 
 onload = function () {
     let form = document.querySelector("form");
@@ -103,7 +104,7 @@ function commandInspection(text) {
         let dividedLogin = text.split(" ");
         if (dividedLogin[2] == "-p" && dividedLogin.length == 4) {
 
-            path = fetch("http://con.teamlog.kr/login", {
+            path = fetch(currentURL + "/login", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -137,7 +138,7 @@ function commandInspection(text) {
         if (dividedRegister[2] == "-p" && dividedRegister[4] == "--email" && dividedRegister[6] == "--school" && ((dividedRegister[8] == "-m") || (dividedRegister[8] == "-h")) && dividedRegister.length == 9) {
 
             if (!(dividedRegister[3].length < 8 || dividedRegister[3].length > 20) && !(dividedRegister[1].length < 5 || dividedRegister[1].length > 20)) {
-                fetch("http://con.teamlog.kr/register", {
+                fetch(currentURL + "/register", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -174,7 +175,7 @@ function commandInspection(text) {
         let dividedAuthKey = text.split(" ");
         if (dividedAuthKey.length == 2) {
 
-            path = fetch("http://con.teamlog.kr/auth", {
+            path = fetch(currentURL + "/auth", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -229,7 +230,7 @@ function commandInspection(text) {
             }
 
             // 답 전달
-            fetch("http://con.teamlog.kr/challenge/" + pid - 1, {
+            fetch(currentURL + "/challenge/" + pid - 1, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -251,7 +252,7 @@ function commandInspection(text) {
         let commentText = text.substring(8);
 
         // 코멘트 전달
-        fetch("http://con.teamlog.kr/mypage", {
+        fetch(currentURL + "/mypage", {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
@@ -271,7 +272,7 @@ function commandInspection(text) {
     } else if (text.match(reverify) != null) {
         let dividedReverify = text.split(" ");
         if (dividedReverify[1] == "--email" && dividedReverify.length == 3) {
-            fetch("http://con.teamlog.kr/auth", {
+            fetch(currentURL + "/auth", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
