@@ -201,7 +201,7 @@ function commandInspection(text) {
             return response.json();
         })
         .then(function (myJSON) {
-
+            history.innerHTML += ("<br>" + myJSON.message);
         })
 
     } else {
