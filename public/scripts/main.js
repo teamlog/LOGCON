@@ -274,7 +274,7 @@ function commandInspection(text) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    "reverify": dividedReverify[2]
+                    "email": dividedReverify[2]
                 })
             })
             .then(function (response) {
