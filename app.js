@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
+const redis = require('redis');
 const session = require('express-session');
+const redisStore = require('connect-redis')(session);
 const indexRouter = require('./routes/index');
 const rankRouter = require('./routes/rank');
 const myPageRouter = require('./routes/mypage');
@@ -17,6 +19,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const logoutRouter = require('./routes/logout');
 const helpRouter = require('./routes/help');
+const client = redis.createClient(6379,'127.0.0.1'); //포트번호와 호스트
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -24,6 +27,10 @@ app.use(session({
   secret: '122345564fasdfafa54fsadaf', //사용자의 세션아이디 값
   resave: false,  //재접속 시 세션아이디 재발급x
   saveUninitialized: true,  //세션 사용 전까지 세션아이디 발급x
+  store : new redisStore({
+    client : client,
+    ttl : 260
+  }) 
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
