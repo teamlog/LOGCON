@@ -21,26 +21,20 @@ router.get('/',(req,res) => {
     const id = req.body.id;
     var tmpPw = req.body.pw;
     const pw = crypto.createHash('sha512').update(tmpPw).digest('base64');
-    db.query('select *from Users where ID = ?', id, (err, result) => {
+    db.query('select *from Users where ID = ? and PW = ?' , [id,pw], (err, result) => {
 		if (err) throw err;
         if(result.length === 0){
               res.json({success : false});
         }
         else {
-      	    if (pw === result[0].PW){; 
-                req.session.user = id;
-                req.session.school = result[0].SCHOOL;
-                req.session.flag = result[0].FLAG;
-                req.session.score = result[0].SCORE;
-                //console.log(req.session.user,req.session.school,pw);
-                req.session.save(() => {
-                    res.json({success : true});
-			    })
-            }
-            else{
-                res.json({success : false});
-            }
-        }    
+            req.session.user = id;
+            req.session.school = result[0].SCHOOL;
+            req.session.flag = result[0].FLAG;
+            req.session.score = result[0].SCORE;
+            req.session.save(() => {
+                res.json({success : true});
+			})
+        }  
     })
 })
 
