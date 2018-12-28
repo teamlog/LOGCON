@@ -30,7 +30,8 @@
         <p>
             <% users.sort((a, b) => {return b.SCORE - a.SCORE}) %>
             <% for (let i = 0; i < users.length; i++) { %>
-                <span><%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMMENT %></span><br>
+                <% if (users[i].ID == "admin") continue; %>
+                <span><%= i + 1 %> <%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMMENT %></span><br>
             <% } %>
         </p>
 
