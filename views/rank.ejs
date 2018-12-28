@@ -29,9 +29,10 @@
         <p class="output">ID, SCHOOL, SCORE, PROFILE_COMEMT</p>
         <p>
             <% users.sort((a, b) => {return b.SCORE - a.SCORE}) %>
+            <% let count = 1; %>
             <% for (let i = 0; i < users.length; i++) { %>
                 <% if (users[i].ID == "admin") continue; %>
-                <span><%= i + 1 %> <%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMMENT %></span><br>
+                <span><%= count++ %>, <%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMMENT %></span><br>
             <% } %>
         </p>
 
