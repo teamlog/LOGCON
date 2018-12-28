@@ -28,6 +28,7 @@
         <br>
         <p class="output">ID, SCHOOL, SCORE, PROFILE_COMEMT</p>
         <p>
+            <% users.sort((a, b) => {return b.SCORE - a.SCORE}) %>
             <% for (let i = 0; i < users.length; i++) { %>
                 <span><%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMEMT %></span><br>
             <% } %>
