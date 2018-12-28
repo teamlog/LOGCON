@@ -156,8 +156,7 @@ function commandInspection(text) {
                 })
                 .then(function (myJSON) {
                     if (myJSON.success) {
-                        history.innerHTML += ("<br>" + "Register success!");
-                        history.innerHTML += ("<br>" + "If you go to any page, you will be taken to the email verification page. The verification code will be emailed in about 5 seconds.");
+                        history.innerHTML += ("<br>" + "Register success! Login and complete your email verification.");
                     } else {
                         history.innerHTML += ("<br>" + "Register fail!");
                     }
