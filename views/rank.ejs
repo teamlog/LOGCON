@@ -26,13 +26,13 @@
         <p>Enter <a href="/">home</a> to return the home page.</p>
 
         <br>
-        <p class="output">ID, SCHOOL, SCORE, PROFILE_COMEMT</p>
+        <p class="output">rank. ID, SCHOOL, SCORE, PROFILE_COMEMT</p>
         <p>
             <% users.sort((a, b) => {return b.SCORE - a.SCORE}) %>
             <% let count = 1; %>
             <% for (let i = 0; i < users.length; i++) { %>
                 <% if (users[i].ID == "admin") continue; %>
-                <span><%= count++ %>, <%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMMENT %></span><br>
+                <span><%= count++ %>. <%= users[i].ID %>, <%= users[i].SCHOOL %>, <%= users[i].SCORE %>, <%= users[i].PROFILE_COMMENT %></span><br>
             <% } %>
         </p>
 
